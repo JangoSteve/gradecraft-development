@@ -1,16 +1,22 @@
+@import color
+@import layout
+@import ribbon_mixins
+@import animation
+
 /* Student sidebar */
+
 .badge-icon
   width: 80%
   max-width: 100px
 
-/* used on the badge show page for both instructors and students, and grade standard edit form */ 
+/* used on the badge show page for both instructors and students, and grade standard edit form */
 .badge-card
   position: relative
   min-height: 8%
   max-height: 7.85rem
   max-width: 30%
   min-width: 17.5rem
-  background-color: $color-blue-1
+  background-color: $color-blue-3
   border-radius: $global-radius
   padding: .5rem
   float: left
@@ -48,7 +54,6 @@
 
 button#remove-badges, button#add-badges
   position: relative
-  font-family: Avenir, sans-serif
   margin-left: .5rem
   top: -.2rem
   @include transition-property("background, opacity")
@@ -68,11 +73,11 @@ button#remove-badges, button#add-badges
   img
     width: 80px
 
-  &.unearned 
-    @include opacity(0.8)
+  &.unearned
+    // @include opacity(0.8)
 
   &.unearned:hover, &.unearned:before:hover, &.unearned:after:hover
-    background-color: $color-blue-1
+    background-color: $color-blue-3
     @include opacity(0.88)
     box-shadow: 0 0 20px #F6C621
 
@@ -210,7 +215,7 @@ button#remove-badges, button#add-badges
       -webkit-transform: scaleY(0.5774) rotate(-45deg)
       -ms-transform: scaleY(0.5774) rotate(-45deg)
       transform: scaleY(0.5774) rotate(-45deg)
-      background-color: $color-alt-blue-1
+      background-color: $color-blue-3
       left: 10px
 
     &:before

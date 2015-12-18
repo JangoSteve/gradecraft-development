@@ -14,7 +14,7 @@ GradeCraft::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.active_support.deprecation = :log
   config.assets.compress = false
-  config.assets.debug = true
+  config.assets.debug = false
   config.cache_classes = false
   config.cache_store = :memory_store
   config.consider_all_requests_local = true

@@ -1,0 +1,36 @@
+@import color
+@import layout
+
+.footer
+  position: relative
+  clear: both
+  width: calc(100% - 4rem)
+  padding: 4rem 2rem
+  background-color: $color-grey-2
+  opacity: .9
+  height: 60px
+  color: $color-grey-5
+  font-size: 1rem
+
+  ul
+    margin: 0
+    padding: 0
+
+    li
+      display: inline
+      list-style-type: none
+      text-transform: uppercase
+      margin-right: 1rem
+      a
+        color: $color-grey-5
+        &:hover
+          color: $color-blue-4
+    &.social
+      font-size: 1.75rem
+
+@media (max-width: $media-small-max)
+  .footer
+    height: 100px
+
+    .right
+      width: 100%

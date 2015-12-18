@@ -1,83 +1,67 @@
-section.login
-  padding: 4rem 1rem !important
+@import color
+@import layout
+
+.login
+  padding: 3rem 1rem
   width: 100%
-  min-height: 300px
-  background-color: $color-yellow-1
-  opacity: .7
+  height: calc(100% - 280px)
+  background-color: rgba(1, 1, 1, .2)
+  .alert-bkg
+    margin-left: -1rem
+    margin-bottom: 1rem
+    width: 100%
 
   input
     border: 0
-    padding: .5rem
+    padding: .75rem
 
-  .columns
-    position: relative
-
-  .login-form
-    background-color: $color-green-2
+  #login-form, #password-forgot
+    padding: 1rem
     border-left: 10px solid $color-white
     border-radius: $global-radius
-    padding: 1rem
+    width: 45.5%
     height: 200px
+    float: left
 
+    input.button, input.input
+      width: 10rem
+      padding: .75rem !important
+      margin-top: .15rem
 
-  #gradecraft-auth
-    padding-right: 1rem
-    margin-right: 3rem
-    width: 100%
-
-    input
-      width: 100%
+  #login-form
+    background-color: lighten($color-green-2, 10%)
 
   #password-forgot
     margin-left: 1rem
     background-color: $color-blue-4
-    border-left: 10px solid $color-white
-    padding: 1rem
-    border-radius: $global-radius
-    width: 40%
-    height: 200px
-    input.input
-      width: 12rem
 
+@media (max-width: $media-medium-max)
   .login
-    form
-      width: 100%
-      margin: 0
-      padding: 0
-      input
-        padding: .5rem
-        width: 95%
-        border: 0
-        margin-bottom: .75rem
-      input:focus
-        background-color: $color-green-3
-        color: $color-white !important
+    padding: 1rem 0
+  #login-form, #password-forgot
+    position: relative
+    width: 100% !important
+    clear: both
+    height: auto !important
+    border-radius: 0 !important
+    padding-top: .5rem
+    padding-bottom: 3rem
+    border-bottom: 1px solid $color-white
+    margin: 0 !important
+    input
+      width: 90%
+      clear: both
+      margin-bottom: .5rem
 
-      .button
-        bottom: 1rem
+    .small, p
+      width: 80%
+
+  #password-forgot
+    padding: 1rem
+    margin-left: 0
+    border: 0
 
 @media (max-width: $media-small-max)
-  section.login
-    min-height: 100%
-    padding: 3rem 0rem 1rem !important
-    min-width: 95% !important
-    .columns
-      width: 100%
-
-    .login-form
-      width: 95%
-      margin-top: 2rem
-      padding: 1rem
-      border: 0
-
-    #gradecraft-auth
-      padding-top: .5rem
-      padding-bottom: 3rem
-      border-bottom: 1px solid $color-white
-      margin-bottom: 1rem
-
-    #password-forgot
-      width: 95%
-      padding: 1rem
-      margin-left: 0
-      border: 0
+  .login
+    margin-top: 5.5rem
+    padding: 0

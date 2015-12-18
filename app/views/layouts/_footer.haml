@@ -1,35 +1,15 @@
-.small-12.medium-2.columns.medium-offset-2
-  %h5 Explore
+.left
   %ul
-    %li= link_to_unless_current "Features", features_path
-  .clear
-.small-12.medium-2.columns
-  %h5 Using GradeCraft
-  %ul
-    %li= link_to "Documentation", "https://gradecraft.uservoice.com"
-    %li= link_to "Video Tutorials", "https://www.youtube.com/channel/UC5fz1gQxcOF9Rn1Qs_mq06g/videos"
-    %li= link_to "Submit a Bug", "http://help.gradecraft.com/"
-  .clear
-
-.small-12.medium-2.columns
-  %h5 About
-  %ul
-    %li= link_to_unless_current "Research", "http://blog.gradecraft.com/research"
-    %li= link_to_unless_current "People", "http://blog.gradecraft.com/the-team"
-    %li= link_to_unless_current "Codebase", "https://github.com/UM-USElab/gradecraft-development"
-    %li= link_to_unless_current "Blog", "http://blog.gradecraft.com"
-  .clear
-
-.small-12.medium-2.columns
-  %h5 Talk to Us
-  %ul
-    %li= mail_to 'help@gradecraft.com', 'Help'
-    %li= mail_to 'help@gradecraft.com', 'Email'
-    %li= link_to "Twitter", "https://twitter.com/gradecraft"
-    %li= link_to "Facebook", "https://facebook.com/gradecraft"
-  .clear
-
-.clear
-.small-12.center
+    %li= link_to_unless_current "Research", research_path
+    %li= link_to_unless_current "Press", press_path
+    %li= link_to_unless_current "Team", our_team_path
+    %li= link_to "Blog", "http://blog.gradecraft.com", :target => "_blank"
   %br
-  .uppercase= "© 2012-#{Date.today.year} Regents of the University of Michigan"
+  .uppercase.small= "© 2012-#{Date.today.year} Regents of the University of Michigan"
+
+.right
+  %ul.social
+    %li= link_to raw("<i class='fa fa-github fa-fw'></i>"), "https://github.com/UM-USElab/gradecraft-development", :target => "_blank"
+    %li= link_to raw("<i class='fa fa-envelope fa-fw'></i>"), "mailto:help@gradecraft.com"
+    %li= link_to raw("<i class='fa fa-twitter fa-fw'></i>"), "https://twitter.com/gradecraft", :target => "_blank"
+    %li= link_to raw("<i class='fa fa-facebook fa-fw'></i>"), "https://facebook.com/gradecraft", :target => "_blank"

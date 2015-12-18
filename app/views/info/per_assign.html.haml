@@ -4,51 +4,51 @@
 
 .pageContent
   = render 'layouts/alerts'
-  
+
   - @assignment_types.each do |assignment_type|
     - assignments_for_type = assignment_type.assignments
     - if assignments_for_type.select {|a| a.grades.graded_or_released.length > 1}.present?
       %h4.subtitle= assignment_type.name
 
-    %table.nopage_dynatable
-      %caption.sr-only= assignment_type.name
-      %thead
-        %tr
-          %th{"scope" => "col"} Name
-          %th{"scope" => "col"} Min
-          %th{"scope" => "col"} Max
-          %th{"scope" => "col"} Median
-          %th{"scope" => "col", 'data-dynatable-column' => 'ave'}
-            Ave
-            %a
-              %i.fa.fa-info-circle
-            .display_on_hover.hover-style
-              The average of all grades, including those who earned zero
-          %th{"scope" => "col", 'data-dynatable-column' => 'aveEarned'}
-            Avg Earned
-            %a
-              %i.fa.fa-info-circle
-            .display_on_hover.hover-style
-              The average of all scores above zero
-          %th Submissions
-          %th Grades
-          %th{:style => "min-width: 220px"}
-      %tbody
-        - assignments = assignments_for_type
-        - assignments.each do |assignment|
-          - if assignment.grades.graded_or_released.present?
-            %tr
-              %td= link_to assignment.name, assignment
-              %td= assignment.low_score
-              %td= assignment.high_score
-              %td= assignment.median
-              %td= assignment.average
-              %td= assignment.earned_average
-              %td
-                - if assignment.accepts_submissions?
-                  = assignment.submissions.count
-              %th= assignment.grade_count
-              %th
-                %ul.button-bar.right
-                  %li= link_to raw("<i class='fa fa-check fa-fw'></i> Quick Grade"), mass_grade_assignment_path(assignment), :class => "button"
-                  %li= link_to raw("<i class='fa fa-cloud-download fa-fw'></i> Download Grades"), export_grades_assignment_path(assignment, format: 'csv'), :class => "button"
+      %table.nopage_dynatable
+        %caption.sr-only= assignment_type.name
+        %thead
+          %tr
+            %th{"scope" => "col"} Name
+            %th{"scope" => "col"} Min
+            %th{"scope" => "col"} Max
+            %th{"scope" => "col"} Median
+            %th{"scope" => "col", 'data-dynatable-column' => 'ave'}
+              Ave
+              %a
+                %i.fa.fa-info-circle
+              .display_on_hover.hover-style
+                The average of all grades, including those who earned zero
+            %th{"scope" => "col", 'data-dynatable-column' => 'aveEarned'}
+              Avg Earned
+              %a
+                %i.fa.fa-info-circle
+              .display_on_hover.hover-style
+                The average of all scores above zero
+            %th Submissions
+            %th Grades
+            %th{:style => "min-width: 220px"}
+        %tbody
+          - assignments = assignments_for_type
+          - assignments.each do |assignment|
+            - if assignment.grades.graded_or_released.present?
+              %tr
+                %td= link_to assignment.name, assignment
+                %td= assignment.low_score
+                %td= assignment.high_score
+                %td= assignment.median
+                %td= assignment.average
+                %td= assignment.earned_average
+                %td
+                  - if assignment.accepts_submissions?
+                    = assignment.submissions.count
+                %th= assignment.grade_count
+                %th
+                  %ul.button-bar.right
+                    %li= link_to raw("<i class='fa fa-check fa-fw'></i> Quick Grade"), mass_grade_assignment_path(assignment), :class => "button"
+                    %li= link_to raw("<i class='fa fa-cloud-download fa-fw'></i> Download Grades"), export_grades_assignment_path(assignment, format: 'csv'), :class => "button"

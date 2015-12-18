@@ -233,6 +233,9 @@ GradeCraft::Application.routes.draw do
 
   get 'um_pilot' => 'pages#um_pilot'
   get 'features' => 'pages#features'
+  get 'press' => 'pages#press'
+  get 'research' => 'pages#research'
+  get 'our_team' => 'pages#team'
 
   #11. Rubrics & Grade Schemes
   resources :rubrics
@@ -254,10 +257,10 @@ GradeCraft::Application.routes.draw do
     resources :earned_badges
   end
 
-  get 'home/index'
+  get 'home' => 'pages#home'
   get 'dashboard' => 'info#dashboard'
-  get 'color_theme' => 'home#color_theme'
-  root :to => "home#index"
+  get 'brand_and_style' => 'pages#brand_and_style_guidelines'
+  root :to => "pages#home"
 
   #13. Users
   %w{students gsis professors admins}.each do |role|

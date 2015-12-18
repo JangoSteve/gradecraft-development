@@ -1,8 +1,15 @@
+@import color
+@import layout
+
+.tab-container
+  padding: 1rem
+
+  p a
+    color: $color-blue-3
+
 .tabs-content
   border: none
   border-top-right-radius: $global-radius
-  border-bottom-right-radius: $global-radius
-  border-bottom-left-radius:  $global-radius
 
   table
     border-top-right-radius: none !important
@@ -10,13 +17,18 @@
     th:first-child th:first-child, th:first-child th:last-child
       border-top-right-radius: 0
 
+form .tabs-content .content
+  min-height: 400px
+  border: 1px solid $color-grey-7
+  padding: 1rem
+
 .ui-tabs
   padding: 0 !important
+  font-family: 'Light-Weight'
 
 .ui-widget-content
-  border: 1px solid $color-grey-4
+  border: 1px solid $color-grey-6
   border-radius: $global-radius
-  font-family: "Avenir", Helvetica, sans-serif
 
   .ui-tabs-panel
     padding: .5rem
@@ -25,7 +37,7 @@
       color: $color-white
 
   .team-filter
-    margin-top: 1rem
+    margin-top: .2rem
 
 #tabs .ui-widget-content a.button.secondary
   color: $color-white
@@ -35,20 +47,21 @@
   border: 0
 
 .ui-tabs .ui-tabs-nav
-  border-radius: $global-radius !important
-  background: $color-blue-1 !important
-  border-bottom: 10px solid $color-blue-0
+  border-bottom-right-radius: 0 !important
+  border-bottom-left-radius: 0 !important
+  background: $color-white !important
+  border-bottom: 5px solid darken($color-blue-3, 0%)
 
   li.ui-state-default
-    background: $color-green-3 !important
+    background: $color-blue-2 !important
     border: 0
     a
       color: $color-white !important
 
     &:hover
-      background: $color-green-2 !important
+      background: $color-blue-3 !important
 
     &.ui-state-active
-      background: $color-blue-0 !important
+      background: $color-blue-3 !important
       a
         color: $color-white !important

@@ -1,8 +1,9 @@
-%li
-  %a{:href => "#"}
-    %i.fa.fa-flash.fa-fw
-    = "Professor".pluralize(current_course.instructors_of_record.count)
-    = current_course.instructors_of_record.map(&:name).join(", ")
+- if current_course.instructors_of_record.present?
+  %li
+    %a{:href => "#"}
+      %i.fa.fa-flash.fa-fw
+      = "Professor".pluralize(current_course.instructors_of_record.count)
+      = current_course.instructors_of_record.map(&:name).join(", ")
 - if current_course.office.present?
   %li
     %a{:href => "#"}

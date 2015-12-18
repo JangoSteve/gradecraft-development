@@ -1,10 +1,12 @@
-%section.login
-  .columns.login-form.login.half
+.login
+  .alert-bkg= render 'layouts/alerts'
+  #login-form
     %h2 Login
+    %p
     = render 'form'
-  .columns#password-forgot.one-third
+  #password-forgot
     %h2 Forgot Your Password?
     %p Enter the email address associated with your account, and you'll receive a link via email that will allow you to create a new password.*
     = render 'passwords/reset_form'
 
-    .small.italic * This will not work if you use a @umich email address to log in. You must reset your password through the UM system.
+    .small * This will not work if you use a @umich email address to log in. You must reset your password through the UM system.

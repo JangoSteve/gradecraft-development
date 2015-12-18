@@ -1,8 +1,10 @@
+@import color
+@import layout
 
 /* Tabs on the student dashboard */
 .sub-nav
-  margin: 1rem 0 0 1rem
-  padding: 0
+  margin: 1.5rem 0 0 1rem
+  padding: 0.5
   display: block
   position: relative
   overflow: hidden
@@ -22,16 +24,16 @@
   /* Individual Tabs */
   .navbar-nav
     display: inline
-    margin: 0 
+    margin: 0
     padding: 0
 
     li
       font-size: .75rem
       height: 1rem
-      background-color: $color-blue-0
+      background-color: $color-blue-2
       border-top-left-radius: $global-radius
       border-top-right-radius: $global-radius
-      margin: 0 0.5rem 0 0 
+      margin: 0 0.5rem 0 0
       padding: 0.5rem 0
       text-transform: capitalize
       a
@@ -51,7 +53,7 @@
 li .announcement-notification-badge
   position: relative
   top: -2px
-  margin: 0 
+  margin: 0
   left: 5px
 
 li a.notification-right
@@ -63,7 +65,15 @@ li a.notification-right
     display: none
 
   .student .offscreen-sidebar
-    padding-top: 3rem
-    background-color: $color-blue-0
-    .sidebar
-      background-color: $color-blue-0
+    text-transform: capitalize
+    li
+      border-bottom: 1px solid $color-blue-4
+      color: $color-white
+      background-color: $color-blue-2
+      padding: .5rem
+      display: block
+    li a
+      color: $color-white
+    ul li:hover
+      background-color: $color-blue-3
+      color: $color-white

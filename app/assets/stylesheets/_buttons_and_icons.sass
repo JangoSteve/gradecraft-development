@@ -1,3 +1,6 @@
+@import color
+@import layout
+
 .button, button
   border-radius: $global-radius
   text-transform: capitalize
@@ -5,39 +8,39 @@
   color: $color-white
   border: none
   margin: 0
-  padding: .4rem
-  font-size: .7rem !important
+  padding: .4rem !important
+  font-size: .7rem
   line-height: .8rem
   cursor: pointer
-  background-color: $color-blue-1
+  background-color: $color-blue-3
   white-space: nowrap
   font-weight: normal
+  font-family: 'Standard-Weight'
 
   &:hover
-    background-color: $color-blue-0
+    background-color: darken($color-blue-3, 10%) !important
     color: $color-white
 
   &:active
-    background-color: $color-green-3
+    background-color: $color-green-2
 
   &.danger
-    background-color: $color-red-3
+    background-color: $color-red-1
 
   &.secondary
-    background-color: $color-green-3
+    background-color: $color-green-2
 
   &.disabled
     color: $color-white
     cursor: default
     opacity: 0.7
     &:hover
-      background-color: $color-blue-1
+      background-color: $color-blue-3
 
 .submit-buttons
   margin-top: 1rem
   position: relative
   height: 1rem
-  font-family: "Avenir", Helvetica, sans-serif !important
   font-size: .8rem !important
   white-space: nowrap
 
@@ -46,14 +49,14 @@
     margin: 0
     padding: 0
     overflow: hidden
-    background-color: $color-blue-1
+    background-color: $color-blue-3
     border-radius: $global-radius
 
     li
       float: left
       padding: 0
       list-style-type: none
-      border-right: 1px solid $color-green-3
+      border-right: 1px solid darken($color-blue-3, 20%)
     li:first-child button
       padding: 0
     li:last-child
@@ -67,9 +70,9 @@ thead
   .button
     border: none
     padding: .3rem
-    background-color: $color-blue-1
+    background-color: $color-blue-3
     &:hover
-      background-color: $color-blue-3
+      background-color: $color-blue-4
     &.select-all
       border-top-right-radius: 0
       border-bottom-right-radius: 0
@@ -114,15 +117,11 @@ tbody
   float: right
 
 .flagged-user-icon > .fa-flag
-  color: $color-grey-6
+  color: $color-grey-8
 
   &.flagged
     color: $color-orange-1
 
 .tab-container
   .button
-    color: $color-grey-5
-
-@media (max-width: 1000px)
-  .hide-for-small
-    display: none
+    color: $color-grey-7

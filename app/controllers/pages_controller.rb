@@ -2,15 +2,10 @@ class PagesController < ApplicationController
 
   skip_before_filter :require_login
 
-  def auth_failure
-
+  def home
+    if current_user
+      redirect_to dashboard_path
+    end
   end
-
-  def features
-
-  end
-
-  def contact
-
-  end
+  
 end

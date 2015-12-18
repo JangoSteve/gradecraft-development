@@ -1,13 +1,17 @@
+@import color
+@import layout
+
 h1, h2, h3, h4, h5
   text-transform: capitalize
   margin: 0
   padding: 0
   clear: both
+  font-family: 'Standard-Weight'
 
 body
   font-size: 0.9rem
   line-height: 1.6
-  font-family: "Avenir", Helvetica, sans-serif
+  font-family: 'Standard-Weight'
 
 .bold
   font-weight: bold !important
@@ -50,13 +54,13 @@ body
 
 a
   text-decoration: none
-  color: $color-blue-0
+  color: $color-blue-2
 
 a:hover
-  color: $color-green-1
+  color: $color-blue-3
 
 hr
-  border-color: $color-grey-1
+  border-color: $color-grey-3
   border-width: 1px 0 0
   margin: 1.5rem auto
 
@@ -64,25 +68,27 @@ hr
   margin-right: -1.2rem
   top: -0.6rem
   text-transform: normal
-  background-color: $color-blue-0
+  background-color: $color-blue-2
 
 /** Page Title **/
 h3.pagetitle
   text-transform: uppercase
+  width: calc(100% - 2rem)
+  display: inline-block
   color: $color-white
-  padding: .75rem 1rem .2rem
+  border-left: 1px solid $color-blue-3
+  padding: 1rem 1rem .5rem
   font-size: 1.8rem
-  background-color: $color-blue-0
+  background-color: $color-blue-2
   line-height: 2.5rem
   font-weight: 100
   opacity: .8
-  border-left: 1px solid $color-blue-1
 
 /** Subtitle **/
 h4.subtitle
   font-size: 1.3rem
   line-height: 1.0
-  color: $color-blue-0
+  color: $color-blue-2
   clear: both
   margin: 1rem 0 1rem
 
@@ -107,7 +113,7 @@ h4.assignment_name
 
 h5.section-title
   font-size: 1.3rem
-  background-color: $color-blue-0
+  background-color: $color-blue-2
   padding: .5rem 1rem
   margin: 1px 2px 0 1px
   z-index: 10 !important
@@ -128,20 +134,17 @@ h5.section-title
   a
     color: $color-white
 
-.tab-container p a
-  color: $color-blue-2
-
 .label a:hover
   color: $color-blue-4
 
 .label.success
-  background-color: $color-green-3
+  background-color: $color-green-2
 
 .label.alert
   background-color: $alert-color
 
 .label.fade
-  background-color: $color-grey-3
+  background-color: $color-grey-5
   color: $color-black
 
 .uploaded-files

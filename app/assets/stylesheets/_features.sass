@@ -1,11 +1,90 @@
+@import color
+@import layout
+
 .features
-  section
-    clear: both
-    position: relative
-    margin: 0 auto
-    padding: 4rem 2rem   
-    min-height: 400px
-    height: auto
-    opacity: .8
-    font-size: 1rem
-    background-color: $color-blue-3
+  .ui-widget-content
+    background: transparent !important
+    border: 0px
+  .ui-widget-content#tabs
+    margin: 0 0 2rem
+    padding: 0
+    .ui-tabs-panel
+      padding: 0
+      float: left
+    ul
+      width: 210px
+      height: 50px
+      margin: .5rem auto
+      border: 0
+      background: transparent !important
+      li
+        border-radius: 0 !important
+        margin: 0
+        border: 0
+        padding: 0
+
+  .hero-section
+    background:rgba(0,0,0,0.1)
+    padding: 40px 0 0
+    h1
+      font-size: 2.2rem
+      color: $color-white
+      font-weight: lighter
+      width: 50%
+      margin: 3rem auto 1rem
+    h3
+      font-size: 1.1rem
+      color: $color-white
+      font-weight: lighter
+      margin-top: 40px
+      text-transform: none !important
+  .feature-section
+    height: 450px
+    padding: 2rem
+    .image-container
+      width: 100%
+      overflow-y: hidden
+    img
+      position: relative
+      height: 90%
+      &.center-image
+        height: 40% !important
+    &.white
+      background-color: $color-white
+    &.alternate-white
+      background-color: lighten($color-blue-4, 20%)
+    .text
+      padding-top: 5rem
+      line-height: 1.7rem
+    h2
+      font-size: 1.8rem
+      color: $color-blue-3
+      font-weight: lighter
+      margin-bottom: 1rem
+    h3
+      text-transform: none !important
+      margin-bottom: .5rem
+    p
+      margin: 0 auto
+    .half
+      width: 48%
+
+@media (max-width: $media-small-max)
+  .features
+    .feature-section
+      height: auto !important
+
+      img, .text
+        margin-top: 0
+        padding-top: 0 !important
+      .half
+        width: 100% !important
+
+@media (max-width: $media-medium-max)
+  .features
+    .hero-section
+      padding-top: 5rem
+      h1
+        font-size: 1.5rem !important
+  .feature-section img
+    margin-top: 3rem !important

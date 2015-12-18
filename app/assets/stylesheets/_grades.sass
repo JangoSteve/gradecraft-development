@@ -1,15 +1,18 @@
+@import color
+@import layout
+
 #custom-value-label
   img
     float: right
     margin-left: .25rem
 
 select#grade_raw_score, input[type=text]#grade_raw_score
-  @include transition-property("background")
+  // @include transition-property("background")
 
 select#grade_raw_score[disabled], input[type=text]#grade_raw_score[disabled]
-  background: $color-grey-4 !important
-  color: $color-grey-2
-  border: none 
+  background: $color-grey-6 !important
+  color: $color-grey-4
+  border: none
   cursor: pointer
   cursor: hand
 
@@ -18,27 +21,27 @@ select#grade_raw_score[disabled], input[type=text]#grade_raw_score[disabled]
   font-style: italic
   float: left
   padding: .25rem .5rem
-  border: 1px solid $color-grey-4
+  border: 1px solid $color-grey-6
   border-radius: $global-radius
 
 #updated-at-current
-  @include transition-property("background, border-color")
-  @include transition-duration(0.3s)
-  @include transition-timing-function(ease)
+  // @include transition-property("background, border-color")
+  // @include transition-duration(0.3s)
+  // @include transition-timing-function(ease)
 
   &.ng-animate
     background: $color-white
-    border-color: $color-grey-4
+    border-color: $color-grey-6
 
 #available, #awarded
   padding: 1rem
   min-height: 150px
 
-#awarded 
-  background-color: $color-green-4
+#awarded
+  background-color: $color-green-2
 
 #available
-  background-color: $color-grey-4
+  background-color: $color-grey-6
 
 /* This is the box that holds the select list */
 #gradebox, .gradebox
@@ -53,25 +56,24 @@ select#grade_raw_score[disabled], input[type=text]#grade_raw_score[disabled]
   display: inline
 
   // transitions
-  @include transition-property("padding, font-size, opacity, border-color")
-  @include transition-duration(0.4s)
-  @include transition-timing-function(ease)
+  // @include transition-property("padding, font-size, opacity, border-color")
+  // @include transition-duration(0.4s)
+  // @include transition-timing-function(ease)
 
   &.inactive
-    @include opacity(0.4)
-    color: $color-grey-6
+    // @include opacity(0.4)
+    color: $color-grey-8
     padding: .5rem
     font-size: .8rem
     cursor: pointer
     cursor: hand
 
-#gradebox 
-  margin-right: .5rem  
-
+#gradebox
+  margin-right: .5rem
 
 /* This is the box that holds the custom entry field */
 .gradebox
-  @include opacity(0.9)
+  // @include opacity(0.9)
 
   input
     border: none

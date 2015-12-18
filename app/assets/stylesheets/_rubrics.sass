@@ -1,9 +1,11 @@
+@import layout
+@import color
+
 #rubric
   textarea
     width: 11.75rem
     border: 0
     height: 65px
-    font-family: "Avenir", "Helvetica", sans-serif !important
 
   input
     height: 2rem
@@ -42,7 +44,7 @@
   height: 70px
   border-bottom-left-radius: $global-radius
   border-bottom-right-radius: $global-radius
-  background: $color-blue-0
+  background: $color-blue-2
 
   h4#points-legend, h4.points-legend
     font-size: 24px
@@ -56,7 +58,7 @@
     .points-missing
       color: $color-yellow-1
     .points-satisfied
-      color: $color-green-3
+      color: $color-green-2
     .points-overage
       color: $color-red-1
 
@@ -70,20 +72,20 @@ h4.notice
 #rubric-column-heading
   margin-top: 1rem
   .criterion-heading
-    background: $color-grey-4
+    background: $color-grey-6
     margin: 0 .5rem .5rem
     padding: .5rem
     float: left
     width: 195px
 
   .level-heading
-    background: $color-grey-4
+    background: $color-grey-6
     padding: .5rem
     float: left
     width: calc(100% - 250px)
 
 td.level-td
-  border: 1px solid $color-grey-4
+  border: 1px solid $color-grey-6
 
 #criterion-box
   width: 94%
@@ -105,35 +107,35 @@ td.level-td
     display: inline
 
 .criterion
-  background: $color-grey-3
+  background: $color-grey-5
 
   &.saved
-    background: $color-blue-1
+    background: $color-blue-3
 
   input.points
     z-index: 500
 
   input.ng-pristine.ng-invalid
     border: 1px solid $color-red-1
-    background: $color-red-2
+    background: $color-red-1
 
   input.ng-valid-required
     background: $color-blue-4
 
   input.ng-invalid
-    border: 1px solid $color-red-2
-    background: $color-red-2
+    border: 1px solid $color-red-1
+    background: $color-red-1
 
   select
-    color: $color-grey-2
+    color: $color-grey-4
     font-size: 13px
     padding: -4px 2px
 
     &[disabled]
-      color: $color-grey-4
+      color: $color-grey-6
 
     option.default, option.selected.default
-      color: $color-grey-3
+      color: $color-grey-5
 
 .messages
   position: absolute
@@ -147,7 +149,7 @@ td.level-td
 
 button.delete
   font-weight: bold
-  background: $color-grey-3
+  background: $color-grey-5
   position: absolute
   right: 0
   top: 0
@@ -157,19 +159,19 @@ button.delete
     background: $color-red-1
 
 .level
-  background: $color-grey-3
+  background: $color-grey-5
 
   &.nocredit
     width: 180px
 
   &.saved
-    background: $color-green-3
+    background: $color-green-2
 
   .badge-messages
     clear: right
     margin-top: 10px
     font-size: 11px
-    color: $color-grey-0
+    color: $color-grey-2
 
   .badge-row
     overflow: hidden
@@ -183,29 +185,29 @@ button.delete
 
       .edit-badges
         display: block
-        background: $color-green-3
+        background: $color-green-2
         color: $color-white
 
   select
-    color: $color-grey-0
+    color: $color-grey-2
     font-size: 13px
     padding: 2rem
 
     &[disabled]
-      color: $color-grey-6
+      color: $color-grey-8
 
     option.default, option.selected.default
-      color: $color-grey-3
+      color: $color-grey-5
 
   .ng-valid .messages
-    color: $color-green-3
+    color: $color-green-2
 
   input.ng-valid-required
     background: $color-blue-4
 
     &:disabled
-      background: $color-grey-6
-      color: $color-grey-6
+      background: $color-grey-8
+      color: $color-grey-8
 
   input.ng-pristine.ng-invalid
     background: $color-white
@@ -224,7 +226,7 @@ button.delete
 .modal-window
   .level-badge
     margin: .5rem
-    background: $color-blue-1
+    background: $color-blue-3
     clear: both
 
 .level-badge-image
@@ -240,10 +242,10 @@ button.delete
 #rubric .rubric-container
   margin: 1rem 0
   clear: both
-  border: 1px dashed $color-grey-4
+  border: 1px dashed $color-grey-6
   padding: 10px
   cursor: move
-  border-left: 2px solid $color-grey-6
+  border-left: 2px solid $color-grey-8
   width: 100%
   overflow-y: scroll
   s
@@ -253,7 +255,7 @@ button.delete
     display: block
     float: left
     right: 0
-    background: $color-blue-0
+    background: $color-blue-2
     padding: .5rem
     color: white
     margin-top: 0
@@ -295,14 +297,14 @@ button.delete
     text-align: left
 
   td.criterion.heading
-    background-color: $color-blue-1
+    background-color: $color-blue-3
     color: $color-white
 
   td.level.heading
     background-color: $color-blue-3
 
   .criterion
-    background-color: $color-blue-1
+    background-color: $color-blue-3
 
   .criterion-name, .level-name
     font-weight: bold
@@ -318,10 +320,10 @@ button.delete
     font-style: italic
 
   td.level-level
-    border: 1px solid $color-grey-4
+    border: 1px solid $color-grey-6
 
   .level.selected
-    background-color: $color-green-3
+    background-color: $color-green-2
 
   .level-badge-image img
     height: 35px
@@ -334,7 +336,7 @@ button.delete
     padding: .25rem
 
   .earned_level
-    background-color: $color-green-3
+    background-color: $color-green-2
     color: $color-white
     font-style: italic
 
@@ -342,7 +344,7 @@ button.delete
     background-color: $color-blue-3
 
   td.comments-box
-    background-color: $color-grey-4
+    background-color: $color-grey-6
     border: none
     padding: .25rem
     font-size: .8rem
@@ -354,10 +356,8 @@ button.delete
       height: 105%
 
   h4.notice
-    color: $color-green-3
+    color: $color-green-2
 
 #grade-rubric-table.edit
-
   .level:hover
-    background-color: $color-green-3
-
+    background-color: $color-green-2

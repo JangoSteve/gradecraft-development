@@ -1,0 +1,23 @@
+@mixin transition-property($properties)
+  -webkit-transition-property: $properties
+  -moz-transition-property: $properties
+  -o-transition-property: $properties
+  transition-property: $properties
+
+@mixin transition-duration($properties)
+  -webkit-transition-duration: $properties
+  -moz-transition-duration: $properties
+  -o-transition-duration: $properties
+  transition-duration: $properties
+
+@mixin transition-timing-function($timing_function)
+  -webkit-transition-timing-function: $timing_function
+  -moz-transition-timing-function: $timing_function
+  -o-transition-timing-function: $timing_function
+  transition-timing-function: $timing_function
+
+@mixin transition($property, $duration, $easing)
+  -webkit-transition: $property $duration $easing
+  -ms-transition: $property $duration $easing
+  -o-transition: $property $duration $easing
+  transition: $property $duration $easing

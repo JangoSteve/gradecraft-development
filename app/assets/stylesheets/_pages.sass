@@ -1,0 +1,70 @@
+@import color
+@import layout
+
+.page
+  .hero-section
+    margin: 0
+    background:rgba(0,0,0,.1)
+    background-position: top center
+    background-repeat: no-repeat
+    height: 100px
+    padding: 40px 0 0
+    h1
+      background-color: $color-white
+      color: $color-black
+      text-align: center
+      font-size: 2.2rem
+      font-weight: lighter
+      width: 50%
+      margin: 0 auto
+      border-radius: 5rem
+  .main-section
+    background-color: $color-white
+    padding: 1rem
+    ul
+      padding-left: 0
+
+    ul li
+      list-style-type: none
+
+    li
+      margin-bottom: 1rem
+
+    .one-third
+      width: 20%
+      text-align: right
+      float: left
+
+    .two-thirds
+      border-left: 1px solid $color-grey-6
+      padding-left: 1rem
+      width: 75%
+      margin-left: 22%
+
+    .date
+      text-transform: uppercase
+      font-size: .8rem
+
+.article
+  margin-bottom: 1.5rem
+
+  .title
+    font-size: 1rem
+
+.role-title
+  text-transform: uppercase
+  font-size: 1.2rem
+  margin-bottom: .5rem
+
+
+.logged-out .page .hero-section, .logged-out .features .hero-section
+  margin: 2.5rem 0 0
+
+@media (max-width: $media-small-max)
+  .page .hero-section
+    padding: 50px 0 0
+    height: auto !important
+    h1
+      width: 100%
+      border-radius: 0 !important
+      background-color: $color-grey-6

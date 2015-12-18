@@ -1,90 +1,51 @@
 /*
- *= require s3_direct_upload_progress_bars
- *= require jquery-ui.min
- *= require jquery.circliful
- *= require font-awesome
- *= require animate.min
- *= require select2
- *= require jquery.dynatable
- *= require angular-tooltips.min
- *= require_tree ./froala
- *= require timelineJS/timeline
-/* Branding colors */
+  *= require s3_direct_upload_progress_bars
+  *= require jquery-ui.min
+  *= require jquery.circliful
+  *= require font-awesome
+  *= require animate.min
+  *= require select2
+  *= require jquery.dynatable
+  *= require angular-tooltips.min
+  *= require_tree ./froala
+  *= require timelineJS/timeline
 
-$px-3: .1875rem;
-
-$global-radius: $px-3;
-
-$txt-color-inverse: #FFF;
-
-// Media Query Sizes
-$media-small-max:   40rem; // 640px
-$media-medium-max:  64rem; // 1024px
-$media-large-max:   90rem; // 1440px ~14"
-$media-xlarge-max:  120rem; //
-
-@mixin transition($property, $duration, $easing) {
-  -webkit-transition: $property $duration $easing;
-  -ms-transition: $property $duration $easing;
-  -o-transition: $property $duration $easing;
-  transition: $property $duration $easing;
-}
-
-@mixin linear-gradient($fromColor, $toColor) {
-  background-color: $toColor; //* Fallback Color */
-  background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor)); /* Saf4+, Chrome */
-  background-image: -webkit-linear-gradient(top, $fromColor, $toColor); // Chrome 10+, Saf5.1+, iOS 5+ */
-  background-image:    -moz-linear-gradient(top, $fromColor, $toColor); /* FF3.6 */
-  background-image:     -ms-linear-gradient(top, $fromColor, $toColor); /* IE10 */
-  background-image:      -o-linear-gradient(top, $fromColor, $toColor); /* Opera 11.10+ */
-  background-image:         linear-gradient(top, $fromColor, $toColor);
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}');
-}
-@mixin title-type-styling {
-  font-family: "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  text-rendering: optimizeLegibility;
-}
-
-/* Importing supporting files. If you create a new css file you'll need to add it here.  */
-
-@import 'color';
-@import 'color_palette';
-@import 'accessibility';
-@import 'alerts';
-@import 'analytics';
-@import 'animation';
-@import 'mixins';
-@import 'background';
-@import 'breadcrumbs';
-@import 'buttons_and_icons';
-@import 'datepicker';
-@import 'debug';
-@import 'collapse';
-@import 'context_menu';
-@import 'features';
-@import 'forms';
-@import 'predictor';
-@import 'ribbon_mixins';
-@import 'grades';
-@import 'badges';
-@import 'grid';
-@import 'history_timeline';
-@import 'homepage';
-@import 'icons';
-@import 'login';
-@import 'layout';
-@import 'rubrics';
-@import 'signup';
-@import 'staff_sidebar';
-@import 'student_sidebar';
-@import 'student_subnav';
-@import 'student_dashboard';
-@import 'tables';
-@import 'tabs';
-@import 'timeline_overrides';
-@import 'topbar';
-@import 'typography';
-@import 'unlocks';
-@import 'videos';
+  *= require color
+  *= require color_palette
+  *= require _accessibility
+  *= require _alerts
+  *= require _analytics
+  *= require _background
+  *= require _breadcrumbs
+  *= require _buttons_and_icons
+  *= require _datepicker
+  *= require _debug
+  *= require _collapse
+  *= require _context_menu
+  *= require _features
+  *= require _history_timeline
+  *= require _footer
+  *= require _forms
+  *= require _newsletter
+  *= require _predictor
+  *= require _grades
+  *= require _badges
+  *= require _grid
+  *= require _homepage
+  *= require _pages
+  *= require _icons
+  *= require _login
+  *= require _layout
+  *= require _rubrics
+  *= require _signup
+  *= require _staff_sidebar
+  *= require _student_sidebar
+  *= require _student_subnav
+  *= require _student_dashboard
+  *= require _tables
+  *= require _tabs
+  *= require _timeline_overrides
+  *= require _topbar
+  *= require _typography
+  *= require _videos
+ */

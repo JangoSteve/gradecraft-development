@@ -1,0 +1,64 @@
+.homepage
+  .alert-bkg= render 'layouts/alerts'
+  .hero-section
+    %h1.center A learning management system that supports gameful course design
+    %h3.center Encourage students to focus on the craft of learning
+  .feature-section.white.gameful
+    %h2.center What is Gameful?
+    .section-container
+      .quarter
+        = image_tag "rocket.png", :width => "125"
+        %br
+        %h4 Earn Up
+        %p Flip the frame so that everyone starts at zero and earns their way up to success.
+      .quarter
+        = image_tag "pointer.png", :width => "125"
+        %br
+        %h4 Increased Autonomy
+        %p Students make meaningful choices about when and how they want to do work within the course frame.
+      .quarter
+        = image_tag "help.png", :width => "125"
+        %br
+        %h4 Freedom to Fail
+        %p Design learning opportunities for students to take risks and explore without the fear that their grade will suffer.
+      .quarter
+        = image_tag "graph.png", :width => "125"
+        %br
+        %h4 Tangible Progress
+        %p Students can see their progress at any time. Levels, unlocks, and badges provide feedback and support motivation to keep working.
+
+
+  .feature-section.alternate-white.feature-overview
+    %h2.center Features to Support Gameful Design
+    .section-container
+      .left.half
+        .feature
+          %i.fa.fa-fw.fa-star
+          %h3 Grade Predictor
+          %p The Grade Predictor enables students to set clear goals for their work. They decide which assignments they want to work on, set a goal for how they expect to do, and ensure that they are building towards success in the course as a whole.
+        .feature
+          %i.fa.fa-fw.fa-lock
+          %h3 Unlocks
+          %p Instructors can declare assignments and badges must be earned in combination, at specific achievement levels, or by specific dates in order for students can unlock additional opportunities.
+        .feature
+          %i.fa.fa-fw.fa-level-up
+          %h3 Leveling System
+          %p Customize the leveling scheme to match your course design - declare what point thresholds equate to earning grade levels, and match the level names to a hierarchy relevant to the coursework itself.
+      .right.half
+        .feature
+          %i.fa.fa-fw.fa-area-chart
+          %h3 Learning Analytics
+          %p
+        .feature
+          %i.fa.fa-fw.fa-certificate
+          %h3 Badges
+          %p
+        .feature
+          %i.fa.fa-fw.fa-trophy
+          %h3 Leaderboards
+          %p
+      .center
+        = link_to "See More Features", features_path, :class => "outline-button"
+        .clear
+
+= render "newsletter_signup"

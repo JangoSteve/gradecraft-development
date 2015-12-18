@@ -1,105 +1,39 @@
+@import color
+@import layout
+
 body
   margin: 0 auto
   padding: 0
   position: relative
 
 .inner-wrap
-  margin: 2rem 0
+  margin: 2rem 0 0
   width: 100%
-  position: relative
+  height: 100%
 
 .outer-wrap
   padding: 0.1rem 0
 
 .mainContainer
-  margin: 0
-  float: left
-
   &.staff
     width: calc(100% - 252px)
+    float: right
 
+  &.student
+    padding-top: .2rem
+
+.sidebar-container
   &.student
     width: calc(100%)
 
 .pageContent
   padding: 1rem
   background-color: $color-white
+  min-height: 100%
 
 .student.mainContent
-  width: calc(100% - 330px)
+  width: calc(100% - 318px)
   float: left
-  background-color: $color-white
-  opacity: .9
-
-
-.footer
-  color: $color-white
-  margin: 0 auto
-  width: 39rem
-  clear: both
-
-  h5
-    font-size: 1.2rem
-
-  .small-12.medium-2.columns
-    margin: 3rem 3rem 0 0
-
-  ul
-    margin: 0
-    padding: 0
-
-    li
-      margin: 0
-      padding: 0
-      list-style-type: none
-      a
-        color: $color-white
-        &:hover
-          color: $color-blue-0
-.pageContainer
-  margin: 0 .75rem
-  width: calc(100% - 290px)
-
-  &.staff
-    width: calc(100% - 270px)
-
-  &.student
-    width: 100%
-
-.mainContent
-  min-height: 1260px
-
-.student.mainContent
-  width: calc(100% - 310px)
-  float: left
-
-.footer
-  color: $color-white
-  margin: 0 auto
-  width: 39rem
-  clear: both
-
-  h5
-    font-size: 1.2rem
-
-  .small-12.medium-2.columns
-    margin: 3rem 3rem 0 0
-
-  ul
-    margin: 0
-    padding: 0
-
-    li
-      margin: 0
-      padding: 0
-      list-style-type: none
-      a
-        color: $color-white
-        &:hover
-          color: $color-blue-0
-
-.tab-container
-  padding: 1rem
 
 /* Allow other things to appear above the timeline */
 .vco-storyjs
@@ -111,9 +45,6 @@ body
 .left
   float: left
 
-.columns
-  float: left
-
 .hidden
   display: none
 
@@ -123,21 +54,10 @@ body
 .no-bullet li
   list-style-type: none
 
-.centered
-  position: absolute
-  left: 50%
-  top: 50%
-  transform: translate(-50%, -50%)
-
-form .tabs-content .content
-  min-height: 400px
-  border: 1px solid $color-grey-5
-  padding: 1rem
-
 hr.dotted
   border-color: $color-white
   border: 0
-  border-bottom: 1px dashed $color-green-3
+  border-bottom: 1px dashed $color-green-2
 
   &.no-margin
     margin: 0
@@ -147,7 +67,7 @@ hr.dotted
     margin-bottom: 0
 
 hr.light-grey
-  border-color: $color-grey-3
+  border-color: $color-grey-5
   border: 1px
 
 a:hover + .display_on_hover
@@ -159,7 +79,7 @@ a:hover + .display_on_hover
   padding: 0.5rem
   width: 250px
   font-size: .9rem
-  background-color: $color-green-3
+  background-color: $color-green-2
   color: $color-white
   border-radius: $global-radius
   z-index: 10
@@ -178,6 +98,12 @@ a:hover + .display_on_hover
       display: block
       clear: both
 
+.centered
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+
 .hover-style.right
   position: absolute
   margin-left: -240px
@@ -188,51 +114,18 @@ a:hover + .display_on_hover
 
 @media (max-width: 1072px)
   .box
-    border-bottom: 1px solid $color-grey-1
+    border-bottom: 1px solid $color-grey-3
     padding: 1rem
 
   .assignment_weights .panel.callout.columns
     margin-right: 1rem
     width: 23%
 
-@media (min-width: 400px)
-
-  .mainContent
-    min-height: 750px
-
-/* Responsive outer container */
-@media (min-width: 1000px)
-
-  .outerContainer
-    padding-right: 0
-
-@media (max-width: $media-small-max)
-  .mainContainer, .student.mainContent
-    width: 100% !important
-
-  .footer
-    width: 100% !important
-
-    .small-12.medium-2.columns
-      width: 100%
-      margin: 1rem 0
-      padding: 0 1rem
-
-  .student.mainContent
-    margin-top: 0
-
-  .columns.pageContainer, .columns.outerContainer, .columns.sideBarContainer
-    padding-left: 0
-    padding-right: 0
-
-  .pageContainer, .row.panel.publicContent
-    margin-top: 0 !important
-
-@media (max-width: 1000px)
-  .row.panel.publicContent
-    margin-top: 0 !important
-
 @media (max-width:787px)
+  .mainContent
+    width: 100% !important
+  .mainContainer.staff
+    width: 100%
   .badge-icon
     height: 25px
     width: 25px

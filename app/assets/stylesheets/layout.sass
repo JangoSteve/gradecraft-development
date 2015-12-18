@@ -1,0 +1,40 @@
+$px-3: .1875rem
+
+$global-radius: $px-3
+
+// Media Query Sizes
+$media-small-max:   50rem // 640px
+$media-medium-max:  64rem // 1024px
+$media-large-max:   90rem // 1440px
+$media-xlarge-max:  120rems
+
+@mixin rounded-corners($radius)
+  -webkit-border-radius: $radius /* Safari 3-4, iOS 1-3.2, Android 1.6- */
+  -moz-border-radius: $radius /* Firefox 1-3.6 */
+  border-radius: $radius /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+
+@mixin opacity($opacity)
+  $ms_opacity: $opacity * 100
+
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$ms_opacity})"
+
+  /* IE 5-7 */
+  filter: alpha(opacity=$ms_opacity)
+
+  /* Netscape */
+  -moz-opacity: $opacity
+
+  /* Safari 1.x */
+  -khtml-opacity: $opacity
+
+  /* Good browsers */
+  opacity: $opacity
+
+@media (max-width: $media-small-max)
+  .hide-for-small
+    display: none
+
+@media (max-width: $media-medium-max)
+  .hide-for-medium
+    display: none

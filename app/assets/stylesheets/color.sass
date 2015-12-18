@@ -1,54 +1,48 @@
-$color-blue-00: #00162F
-$color-blue-0: #002D62
-$color-blue-1: #2E70BE
-$color-blue-2: #269ECC
-$color-blue-3: #48BDEB
+$txt-color-inverse: #FFF
+
+$color-blue-1: #00162F
+$color-blue-2: #002D62
+$color-blue-3: #2E70BE
 $color-blue-4: #8BDEFF
 $color-blue-5: #E7F8FF
-$blues: ( "00": #00162F, 0: #002D62, 1: #2E70BE, 2: #269ECC, 3: #48BDEB, 4: #8BDEFF, 5: #E7F8FF )
+$blues: ( "1": #00162F, 2: #002D62, 3: #2E70BE, 4: #8BDEFF, 5: #E7F8FF )
 
-$color-alt-blue-0: #1E267F
-$color-alt-blue-1: #1460AE
-$color-alt-blue-2: #6FA9DD
-$color-alt-blue-3: #55C3F5
-$alt-blues: (0: #1E267F, 1: #1460AE, 2: #6FA9DD, 3: #55C3F5)
+$color-alt-blue-1: #1E267F
+$color-alt-blue-2: #1460AE
+$color-alt-blue-3: #6FA9DD
+$color-alt-blue-4: #55C3F5
+$alt-blues: (1: #1E267F, 2: #1460AE, 3: #6FA9DD, 4: #55C3F5)
 
 $color-purple-1: #490454
 $color-purple-2: #8F27A1
 $purples: (1: #490454, 2: #8F27A1)
 
-$color-green-0: #1C7200
 $color-green-1: #219800
-$color-green-2: #68A127
-$color-green-3: #7CC02F
-$color-green-4: #7CC09B
-$color-green-5: #EFFFED
-$greens: (0: #1C7200, 1: #219800, 2: #68A127, 3: #7CC02F, 4: #7CC09B, 5: #EFFFED)
+$color-green-2: #7CC02F
+$greens: (1: #219800, 2: #7CC02F)
 
-$color-red-0: #7F0D0D
-$color-red-1: #B40D0D
-$color-red-2: #CC0000
-$color-red-3: #D65C5C
-$reds: (0: #7F0D0D, 1: #B40D0D, 2: #CC0000, 3: #D65C5C)
+$color-alt-green-1: #1C7200
+$color-alt-green-2: #68A127
+$alt-greens: (1: #1C7200, 2: #219800)
 
-$color-orange-1: #F1592A
-$color-orange-2: #F7941E
-$color-orange-3: #FCB040
-$oranges: (1: #F1592A, 2: #F7941E, 3: #FCB040)
+$color-red-1: #CC0000
+$reds: (1: #CC0000)
+
+$color-orange-1: #F7941E
+$oranges: (1: #F7941E)
 
 $color-yellow-1: #FFCF06
-$color-yellow-2: #FFFD73
-$yellows: (1: #FFCF06, 2: #FFFD73)
+$yellows: (1: #FFCF06)
 
-$color-grey-00: #000000
-$color-grey-0: #333333
-$color-grey-1: #444444
-$color-grey-2: #666666
-$color-grey-3: #CCCCCC
-$color-grey-4: #EEEEEE
-$color-grey-5: #FFFFFF
-$color-grey-6: #999999
-$greys: ("00": #000000, 0: #333333, 1: #444444, 2: #666666, 3: #CCCCCC, 4: #EEEEEE, 5: #FFFFFF, 6: #999999)
+$color-grey-1: #000000
+$color-grey-2: #333333
+$color-grey-3: #444444
+$color-grey-4: #666666
+$color-grey-5: #CCCCCC
+$color-grey-6: #EEEEEE
+$color-grey-7: #FFFFFF
+$color-grey-8: #999999
+$greys: (1: #000000, 2: #333333, 3: #444444, 4: #666666, 5: #CCCCCC, 6: #EEEEEE, 7: #FFFFFF, 8: #999999)
 
 // COLOR AID CLASSES:
 
@@ -66,6 +60,10 @@ $greys: ("00": #000000, 0: #333333, 1: #444444, 2: #666666, 3: #CCCCCC, 4: #EEEE
 
 @each $number, $hex-code in $greens
   .color-green-#{$number}
+    background-color: $hex-code
+
+@each $number, $hex-code in $alt-greens
+  .color-alt-green-#{$number}
     background-color: $hex-code
 
 @each $number, $hex-code in $reds
@@ -86,9 +84,29 @@ $greys: ("00": #000000, 0: #333333, 1: #444444, 2: #666666, 3: #CCCCCC, 4: #EEEE
 
 // ALIASES:
 
-$color-black: $color-grey-00 // alias
-$color-white: $color-grey-5 // alias
+$color-black: $color-grey-1 // alias
+$color-white: $color-grey-7 // alias
 
 // LAYOUT ALAISES
 $txt-color-inverse: $color-white
 $alert-color: $color-orange-1
+
+@mixin four-color-horizontal-gradient($color1, $color2, $color3, $color4)
+  background-color: $color1 //* Fallback Color */
+  background-image: -webkit-gradient(linear, left, right, from($color1), to($color4)) /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(to right, $color1, $color2, $color3, $color4) // Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(to right, $color1, $color2, $color3, $color4) /* FF3.6 */
+  background-image:     -ms-linear-gradient(to right, $color1, $color2, $color3, $color4) /* IE10 */
+  background-image:      -o-linear-gradient(to right, $color1, $color2, $color3, $color4) /* Opera 11.10+ */
+  background-image:         linear-gradient(to right, $color1, $color2, $color3, $color4)s
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$color1}', EndColorStr='#{$color4}')
+
+@mixin linear-gradient($fromColor, $toColor)
+  background-color: $toColor //* Fallback Color */
+  background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor)) /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, $fromColor, $toColor)s // Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(top, $fromColor, $toColor) /* FF3.6 */
+  background-image:     -ms-linear-gradient(top, $fromColor, $toColor) /* IE10 */
+  background-image:      -o-linear-gradient(top, $fromColor, $toColor) /* Opera 11.10+ */
+  background-image:         linear-gradient(top, $fromColor, $toColor)
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}')

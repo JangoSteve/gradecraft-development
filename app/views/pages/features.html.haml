@@ -1,0 +1,20 @@
+.features
+  .hero-section
+    %h1.center Features to Bring Gameful Experiences to the Classroom
+
+    .center
+      Explore the Interfaces for:
+      #tabs.ui-tabs.ui-widget
+        %ul.ui-tabs-nav{:role => "tablist"}
+          %li
+            %a{ "href" => "#tab"} Instructors
+          %li
+            %a{ "href" => "#tabt2"} Students
+
+        #tabt1.ui-tabs-panel.ui-widget-content{:role => "tabpanel"}
+          .ui-tabs-panel#tab.active{:role => "tabpanel", "aria-hidden" => false }
+            = render "instructor_features"
+          .ui-tabs-panel#tabt2{:role => "tabpanel", "aria-hidden" => false }
+            = render "student_features"
+
+= render "newsletter_signup"

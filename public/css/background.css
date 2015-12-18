@@ -9,7 +9,6 @@ body {
   width: 400px;
   border-radius: 1rem;
   opacity: .6;
-  font-family: Georgia, serif;
   padding: 1rem;
 }
 
@@ -43,7 +42,7 @@ body {
 .back-to-site a:hover {
   color: #1E267F;
 }
- 
+
 .back-color-wash {
   background-color: #48BDEB;
   z-index: -1000;
@@ -115,11 +114,11 @@ body {
 .cloud-3 {
   margin-left: 25%;
 }
-.cloud-4 { 
+.cloud-4 {
   margin-left: 50%;
 }
 
-.cloud-4 { 
+.cloud-4 {
   margin-left: 75%;
 }
 .cloud-bubble {
@@ -334,7 +333,7 @@ body {
   border-radius: 50px;
 }
 
-.cloud-bubble-4 { 
+.cloud-bubble-4 {
   left:  250px;
   top: 120px;
   width: 90px;
@@ -344,7 +343,7 @@ body {
   border-radius: 45px;
 }
 
-.cloud-bubble-5 { 
+.cloud-bubble-5 {
   left:  20px;
   top: 30px;
   width: 150px;
@@ -354,7 +353,7 @@ body {
   border-radius: 75px;
 }
 
-.cloud-bubble-6 { 
+.cloud-bubble-6 {
   left:  200px;
   top: 30px;
   width: 125px;
@@ -372,7 +371,7 @@ body {
   -webkit-border-radius: 75px;
   border-radius: 75px;
   }
-.cloud-bubble-8 { 
+.cloud-bubble-8 {
   left: 200px;
   top: 80px;
   width: 130px;
@@ -390,7 +389,7 @@ body {
   -webkit-border-radius: 100px;
   border-radius: 100px;
   }
-.cloud-bubble-10 { 
+.cloud-bubble-10 {
   left: 120px;
   top: -10px;
   width: 200px;
@@ -566,7 +565,7 @@ body {
 
 .mountain-size-1 {
   margin-top: -60px;
-  
+
   }
 .mountain-size-1 .mountain-left-side {
     border-left-width: 120px;

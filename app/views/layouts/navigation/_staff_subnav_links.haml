@@ -1,14 +1,15 @@
-%li.has-form{:role => "search"}
-  %label.sr-only{:for => "search-input"}
-    Search #{term_for :students}
-  %input#student-search.students-search-query.search-input{ data: { autocompleteUrl: autocomplete_student_name_students_path }, type: "text", placeholder: "Search #{term_for :students}", label: false }
-  %a.alert.button{ :href => "#" } Go
+.hide-for-small
+  %li.has-form{:role => "search"}
+    %label.sr-only{:for => "search-input"}
+      Search #{term_for :students}
+    %input#student-search.students-search-query.search-input{ data: { autocompleteUrl: autocomplete_student_name_students_path }, type: "text", placeholder: "Search #{term_for :students}", label: false }
+    %a.alert.button{ :href => "#" } Go
 
-%li.has-form{:role => "search"}
-  %label.sr-only{:for => "search-input"}
-    Search Courses
-  %input.courses-search-query.search-input{ data: { autocompleteUrl: courses_path }, type: "text", placeholder: "Search Courses", label: false }
-  %a.alert.button{ :href => "#" } Go
+  %li.has-form{:role => "search"}
+    %label.sr-only{:for => "search-input"}
+      Search Courses
+    %input.courses-search-query.search-input{ data: { autocompleteUrl: courses_path }, type: "text", placeholder: "Search Courses", label: false }
+    %a.alert.button{ :href => "#" } Go
 
 %h5 Overview
 - if current_course.use_timeline?
@@ -63,23 +64,24 @@
 %li= link_to_unless_current raw("<i class='fa fa-heartbeat fa-fw'></i> #{term_for :assignment} Analytics"), per_assign_path
 
 - if current_user_is_professor? || current_user_is_admin?
-  %hr
+  .hide-for-small
+    %hr
 
-  %h5 Downloads
-  %li= link_to_unless_current raw('<i class="fa fa-list-ul fa-fw"></i> Final Grades'), final_grades_path(format: 'csv')
-  %li
-    %a{:href => gradebook_path(format: 'csv')} <i class="fa fa-table fa-fw"></i> Full Gradebook
-  - if current_course.student_weighted?
+    %h5 Downloads
+    %li= link_to_unless_current raw('<i class="fa fa-list-ul fa-fw"></i> Final Grades'), final_grades_path(format: 'csv')
     %li
-      %a{:href => multiplied_gradebook_path(format: 'csv')} <i class="fa fa-table fa-fw"></i> Multiplied Gradebook
-  %li
-    %a{:href => export_all_scores_assignment_types_path(format: 'csv')} <i class="fa fa-th-large fa-fw"></i> #{term_for :assignment_type } Summaries
-
-  - if current_course.has_badges?
+      %a{:href => gradebook_path(format: 'csv')} <i class="fa fa-table fa-fw"></i> Full Gradebook
+    - if current_course.student_weighted?
+      %li
+        %a{:href => multiplied_gradebook_path(format: 'csv')} <i class="fa fa-table fa-fw"></i> Multiplied Gradebook
     %li
-      %a{:href => export_earned_badges_path(format: 'csv')} <i class="fa fa-certificate fa-fw"></i> Awarded #{current_course.badge_term.pluralize}
+      %a{:href => export_all_scores_assignment_types_path(format: 'csv')} <i class="fa fa-th-large fa-fw"></i> #{term_for :assignment_type } Summaries
 
-  %li= link_to_unless_current raw("<i class='fa  fa-fw'></i> #{term_for :assignment} Structure"), export_structure_assignments_path(format: 'csv')
+    - if current_course.has_badges?
+      %li
+        %a{:href => export_earned_badges_path(format: 'csv')} <i class="fa fa-certificate fa-fw"></i> Awarded #{current_course.badge_term.pluralize}
+
+    %li= link_to_unless_current raw("<i class='fa  fa-fw'></i> #{term_for :assignment} Structure"), export_structure_assignments_path(format: 'csv')
 
 %hr
 
@@ -106,13 +108,16 @@
 %li= link_to_unless_current raw('<i class="fa fa-bullhorn fa-fw"></i> Announcements'), announcements_path
 %li= link_to_unless_current raw('<i class="fa fa-calendar fa-fw"></i> Calendar Events'), events_path
 
+
 - if LTIProvider.present?
-  %hr
+  .hide-for-small
+    %hr
 
-  %h5 Tools
-  - LTIProvider.all.each do |tool|
-    %li= link_to_unless_current raw("<i class='fa fa-external-link-square fa-fw'></i> #{tool.name}"), launch_lti_provider_path(tool)
+    %h5 Tools
+    - LTIProvider.all.each do |tool|
+      %li= link_to_unless_current raw("<i class='fa fa-external-link-square fa-fw'></i> #{tool.name}"), launch_lti_provider_path(tool)
 
+.hide-for-small
   %hr
 
   %h5{ class: "make-lizards" } Admin

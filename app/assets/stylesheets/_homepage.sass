@@ -1,146 +1,141 @@
+@import color
+@import layout
+
 .homepage
-  section
-    clear: both
-    position: relative
-    margin: 0 auto
-    padding: 1rem   
-    min-height: 400px
-    height: auto
-    opacity: .8
-    font-size: 1rem
-
-    &.video-promo
-      padding-top: 3rem
-      background-color: $color-blue-3
-
-    &.press
-      background-color: $color-blue-0
-
-      .date
-        margin-left: -1rem
-        color: $color-green-4
-
-    &.newsletter
-      background-color: $color-blue-2
-
-      #mc_embed_signup .button
-        background-color: $color-blue-00
-        font-family: Avenir, sans-serif
-        font-weight: normal
-
-    h1
-      margin-top: 1rem
-      margin-bottom: 0
-      padding-bottom: 0
-      font-weight: 100
-      color: $color-yellow-1
-      font-size: 2rem
-    
-    .columns  
-      float: left
-
-    ul
-      margin: 0
-      padding: 0 1rem
-
-      li
-        list-style-type: none
-        margin: 0 0 .5rem
-        padding: 0
-
-        a
-          color: $color-blue-4
-
-    .two-thirds
-      width: 66%
-
-    .half
-      width: 48%
-
-    .one-third
-      width: 33%
-
-    .video 
-      margin-top: 2rem
-      padding-left: 1rem
-
-      iframe
-        width: 100%
-        min-height: 320px
-        height: auto
-
-    .twitter iframe
-      height: 400px !important
-
   .alert-bkg
-    width: 100% !important
-    margin: -1rem 0
-    padding: 1rem 0
-    opacity: .8
-    background-color: $color-blue-3
+    background:rgba(255,255,255,0.5)
+    margin-top: -15px !important
+    padding: 10px 0
+  .hero-section
+    background:rgba(255,255,255,0.5)
+    height: 300px
+    padding: 40px 0 0
+    h1
+      text-transform: none
+      font-size: 2rem
+      color: $color-grey-3
+      font-weight: lighter
+      width: 50%
+      margin: 70px auto 0
+    h3
+      font-size: .9rem
+      color: $color-grey-4
+      font-style: 'Light-Weight'
+      margin-top: 20px
+      font-weight: 100
+      text-transform: none !important
+  .section-container
+    margin: 0 auto
+    padding: 0 50px
+  .gameful
+    height: 400px
+  .feature-overview
+    height: auto
+  .feature-section
+    padding: 40px
+    &.white
+      background-color: $color-white
+    &.alternate-white
+      background-color: lighten($color-grey-5, 15%)
+    /* Gameful features itemized on the homepage */
+    .feature
+      width: 90%
+      height: auto !important
+      padding: 0 1.5rem
+      margin-bottom: 1rem
+    p
+      line-height: 1.3rem
+      margin: 0 3.5rem
+      font-size: .9rem
+      clear: both
+    h2
+      font-size: 1.9rem
+      color: $color-grey-4
+      text-transform: none !important
+      font-weight: bold
+      margin-bottom: 3rem
+    h3
+      float: left
+      display: inline
+      text-transform: none !important
+      color: $color-blue-3
+      margin-bottom: .5rem
+      clear: none
+      font-size: 1.25rem
+      font-style: 'Light-Weight'
+      font-weight: 100 !important
+    h4
+      margin-bottom: .5rem
+    i
+      float: left
+      margin-top: -.25rem
+      display: inline
+      font-size: 2.5rem
+      padding-right: .25rem
 
+      color: $color-blue-3
+    .half
+      width: 50%
+    .quarter
+      float: left
+      position: relative
+      width: 23%
+      margin: 0 .3% 0 .3%
+      text-align: center
+      h4
+        text-align: center !important
+        font-size: 120%
+      p
+        margin: 0
+        font-size: .8rem
+
+a.outline-button
+  position: relative
+  top: 1rem
+  border: 2px solid $color-blue-3
+  color: $color-blue-3
+  border-radius: .5rem
+  padding: .5rem
+
+@media (max-width: $media-medium-max)
+  .homepage
+    .hero-section
+      h1
+        font-size: 1.5rem
+
+    .section-container
+      padding: 0 .5rem
+    .feature-overview
+      h2
+        margin-bottom: 2rem !important
 
 @media (max-width: $media-small-max)
-
   .homepage
-    margin: 3rem 0 0 
-
-    section    
-      margin: 0
-      width: 100%
-      font-size: .7rem
-      padding: 0rem
-      height: auto
-
-      &.video-promo 
-        margin: 0
-        padding-top: 0rem !important
-        padding-bottom: 5rem
-
-      &.newsletter 
-        margin: 0
-        padding: 0 0 1rem
-
+    .hero-section
       h1
-        font-size: 1.6rem
-
-      p 
-        margin: 0 0 .25rem
-
-      .columns
+        font-size: 1.3rem
+    .section-container
+      padding: 0 !important
+    .gameful
+      h2
+        margin-bottom: 0
+    .half
+      width: 100% !important
+      margin: 0
+      padding: 0
+    .feature
+      clear: both
+      padding: 0 !important
+      width: 100% !important
+    .feature-section
+      padding: 2rem 0 !important
+      h2
+        margin-bottom: 1rem !important
+    .quarter
+      width: calc(100% - 2rem) !important
+      clear: both
+      margin: 0
+      background-color: $color-white
+      padding: 0 1rem 1rem
+      p
         margin: 0
-        padding: 1rem
-        width: 90%
-        clear: both
-
-        &.text
-          font-size: .7rem
-
-          h1 
-            margin-top: 2rem
-
-        &.video
-          margin-top: 0
-
-          iframe
-            float: none
-            display: block
-            min-height: 200px
-            width: 90% !important
-            margin: 0
-            padding: 0rem
-
-        &.news-articles
-          padding: 0 1rem
-
-        &.signup
-          padding: 0 1rem
-          h1
-            margin-top: .5rem
-
-        &.twitter 
-          background-color: $color-blue-0
-          iframe
-            clear: both
-            height: 200px !important
-            width: 100%

@@ -4,4 +4,8 @@
     = f.text_field :email, placeholder: "Email", :autocorrect => "off", :autocapitalize => "off"
     = label_tag :user_password, 'Password', class:'sr-only'
     = f.password_field :password, placeholder: 'Password'
-    .right= f.submit "Log in", class: 'button', alt: "Log in"
+    = f.submit "Log in", class: 'button', alt: "Log in"
+    %p
+    .small
+      * This will not work if you use a @umich email address to log in. You must
+      = link_to "log in via UM.", saml_init_path

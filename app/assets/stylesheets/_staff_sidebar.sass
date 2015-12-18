@@ -1,10 +1,14 @@
+@import color
+@import layout
+
 /** Staff Sidebar **/
-.sidebar
+.sidebar-container
   width: 220px
   float: left
   padding: .75rem 1rem
-  background-color: $color-blue-0
+  background-color: $color-blue-2
   opacity: .9
+  font-family: Light-Weight
 
   li.has-form
     margin-bottom: .75rem
@@ -21,18 +25,18 @@
 
   a.button
     width: 20px
-    padding: 8px 6px 7px
+    padding: 8px 6px 7px !important
     float: right
     border-top-left-radius: 0
     border-bottom-left-radius: 0
     &:hover
-      background-color: $color-blue-00
-
+      background-color: darken($color-blue-3, 10%) !important
 
   /* Subheadings */
   h5
     font-size: .9rem
     font-weight: 100
+    font-family: 'Standard-Weight'
     color: $color-blue-4
     margin: 0 0 0 0.25rem
 
@@ -49,7 +53,7 @@
     font-weight: 800
 
     &:not(a)
-      color: $color-green-3
+      color: $color-yellow-1
 
     a
       display: block !important
@@ -59,7 +63,7 @@
       text-decoration: none
 
     a:hover, a:focus
-      background-color: $color-blue-1 !important
+      background-color: $color-blue-3 !important
       color: $color-white
 
     .notification

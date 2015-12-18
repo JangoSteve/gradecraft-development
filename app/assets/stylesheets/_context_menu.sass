@@ -1,11 +1,11 @@
+@import color
+
 .context_menu
-  background-color: $color-green-2
+  background-color: $color-blue-3
   height: 2rem
   margin: 0
   width: 100%
-  clear: both
   opacity: .8
-  overflow: hidden
 
   ul
     padding: 0
@@ -17,14 +17,16 @@
       line-height: 2rem
       text-transform: capitalize
       display: block
-      padding: 0rem .25rem
+      padding: 0rem .5rem
       font-size: .8rem
       float: left
-      border-left: 1px solid $color-green-3
+      border-left: 1px solid darken($color-blue-3, 20%)
+      color: $color-blue-4
       border-radius: 0 !important
+      border-collapse: collapse
+      &:hover
+        background-color: $color-blue-1
       & > a
         color: $color-white
-        padding: 0 .5rem
       & a:hover
-        background-color: $color-green-0
         display: block

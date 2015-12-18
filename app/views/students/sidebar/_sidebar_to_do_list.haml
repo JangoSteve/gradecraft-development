@@ -16,7 +16,7 @@
             .display_on_hover.hover-style
               You have included this #{term_for :assignment} in your grade prediction
           - if current_student.submission_for_assignment(assignment).present?
-            %span.bold.strikethrough.assignment-name= link_to "#{assignment.try(:name)}", assignment
+            %span.strikethrough.assignment-name= link_to "#{assignment.try(:name)}", assignment
             .small.uppercase= "#{assignment.assignment_type.name}"
           - else
             - if assignment.name_visible_for_student?(current_student)

@@ -1,0 +1,46 @@
+.page
+  .hero-section
+    %h1 Brand & Style Guidelines
+  .main-section
+    .one-third
+      %ul= render 'subnav'
+    .two-thirds
+      %ul
+        %li.color-group
+          .title.bold Blues
+          .color-bar
+            != color_block_set("blue", %w[ 1 2 3 4 5 ])
+
+        %li.color-group
+          .title.bold Purples
+          .color-bar
+            != color_block_set("purple", %w[ 1 2 ])
+
+        %li.color-group
+          .title.bold Greens
+          .color-bar
+            != color_block_set("green", %w[ 1 2 ])
+
+        %li.color-group
+          .title.bold Warm Hues
+          .color-bar
+            != color_block_set("red", %w[ 1])
+            != color_block_set("orange", %w[ 1 ])
+            != color_block_set("yellow", %w[ 1 ])
+
+        %li.color-group
+          .title.bold Gr[ea]ys
+          .color-bar
+            != color_block_set("grey", %w[ 1 2 3 4 5 6 7 8 ])
+
+        %hr
+
+        %li.color-group
+          .title.bold Background Blues
+          .color-bar
+            != color_block_set("alt-blue", %w[ 1 2 3 4 ])
+
+        %li.color-group
+          .title.bold Background Greens
+          .color-bar
+            != color_block_set("alt-green", %w[ 1 2 ])

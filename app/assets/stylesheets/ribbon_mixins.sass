@@ -1,0 +1,48 @@
+@mixin ribbon
+  display: block
+  width: 18px
+  position: absolute
+  color: $color-white
+  padding: 8px 0 0 0
+  margin-left: 11px
+  height: 15px
+  text-align: center
+  z-index: -10
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3)
+
+  &:after
+    display: block
+    width: -12px
+    top: 14px
+    height: 0
+    content: ""
+    position: relative
+    bottom: 1px
+    z-index: 10
+    border-width: 0 9px 9px 9px
+    border-style: solid
+
+  &.red
+    background-color: $color-red-1
+    &:after
+      border-color: $color-red-1 $color-red-1 transparent $color-red-1
+  &.orange
+    background-color: $color-orange-1
+    &:after
+      border-color: $color-orange-1 $color-orange-1 transparent $color-orange-1
+  &.yellow
+    background-color: $color-yellow-1
+    &:after
+      border-color: $color-yellow-1 $color-yellow-1 transparent $color-yellow-1
+  &.green
+    background-color: $color-green-2
+    &:after
+      border-color: $color-green-2 $color-green-2 transparent $color-green-2
+  &.blue
+    background-color: $color-blue-1
+    &:after
+      border-color: $color-blue-1 $color-blue-1 transparent $color-blue-1
+  &.black
+    background-color: $color-grey-3
+    &:after
+      border-color: $color-grey-3 $color-grey-3 transparent $color-grey-3

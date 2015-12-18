@@ -1,22 +1,25 @@
+@import color
+@import layout
+
 .student-sidebar
-  width: 276px
+  width: 285px
   margin-top: 0rem
   padding: 1rem
-  background-color: $color-blue-0
+  background-color: $color-blue-2
   color: $color-white
   opacity: .9
   float: left
-  border-left: 1px dashed $color-blue-0
+  border-left: 1px dashed $color-blue-2
 
   .avatar
     text-align: center
     position: relative
-    img 
+    img
       margin: .5rem auto
     ul li
       display: inline
       a:hover
-        background-color: $color-green-3
+        background-color: $color-green-2
 
   .panel
     margin-bottom: 1.25rem
@@ -36,14 +39,16 @@
     margin: 0
     padding: 0
 
-  .form_label 
-    color: $color-green-3
+  .form_label
+    color: $color-green-2
+    font-style: normal
+    font-family: 'Light-Weight'
 
   .todo li
     list-style-type: none
 
-  .assignment-item 
-    border-bottom: 1px dashed $color-yellow-1
+  .assignment-item
+    border-bottom: 1px dashed $color-white
     padding-bottom: .5rem
     margin-bottom: .5rem
 
@@ -52,10 +57,12 @@
       padding-bottom: 0
       margin-bottom: 0
     .button:hover
-      background-color: $color-blue-3
+      background-color: $color-blue-4
 
-    .assignment-name a:hover
-      color: $color-green-3
+    .assignment-name
+      font-family: 'Light-Weight'
+      a:hover
+        color: $color-green-2
 
   ul.block-grid
     margin: 0.5rem auto !important
