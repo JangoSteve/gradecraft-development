@@ -30,5 +30,5 @@ GradeCraft::Application.configure do
 end
 
 CarrierWave.configure do |config|
-  config.storage = :file
+  config.storage = :fog
 end
