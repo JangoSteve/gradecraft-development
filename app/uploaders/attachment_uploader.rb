@@ -41,15 +41,22 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   end
 
   def file_type
-    "#{model.class.to_s.underscore.pluralize}"
+    model.class.to_s.underscore.pluralize
   end
 
   def owner
-    "#{model.owner_name.gsub(/\s/, "-")}" if model.class.method_defined? :owner_name
+    model.owner_name.gsub(/\s/, "-") if model.class.method_defined? :owner_name
   end
 
   def tokenized_name
-    var = :"@#{mounted_as}_secure_token"
-    model.instance_variable_get(var) || model.instance_variable_set(var, "#{Time.now.to_i}_#{file.basename.gsub(/\W+/, "_").downcase[0..40]}")
+    model.instance_variable_get(secure_token_name) || model.instance_variable_set(secure_token_name, filename_from_basename)
+  end
+
+  def filename_from_basename
+    "#{Time.now.to_i}_#{file.basename.gsub(/\W+/, "_").downcase[0..40]}"
+  end
+
+  def secure_token_name
+    :"@#{mounted_as}_secure_token"
   end
 end
