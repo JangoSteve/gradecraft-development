@@ -16,7 +16,11 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     owner = "/#{model.owner_name}" if model.class.method_defined? :owner_name
     "uploads#{course}#{assignment}#{file_type}#{owner}"
 
-    [ "uploads", course, assignment, file_type, owner ].compact.join("/")
+    if Rails.env.development?
+      [ "uploads", ENV['AWS_S3_DEVELOPER_TAG'], course, assignment, file_type, owner ].compact.join("/")
+    else
+      [ "uploads", course, assignment, file_type, owner ].compact.join("/")
+    end
   end
 
   # Override the filename of the uploaded files:
