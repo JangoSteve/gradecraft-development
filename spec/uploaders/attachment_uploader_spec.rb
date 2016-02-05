@@ -4,11 +4,6 @@ include Toolkits::Uploaders::AttachmentUploader
 include UniMock::Rails
 include UniMock::Time
 
-class CarrierWave::Uploader::Base
-  def store_dir
-  end
-end
-
 RSpec.describe AttachmentUploader do
   let(:uploader) { AttachmentUploader.new(model, :file) }
   let(:model) { MockClass::FullUpFileKlass.new }
