@@ -36,7 +36,7 @@ RSpec.describe AttachmentUploader do
         course: "some-course",
         assignment: "some-assignment",
         file_klass: "devious_files",
-        owner: "dave-eversby"
+        owner_name: "dave-eversby"
       })
     end
 
@@ -54,7 +54,7 @@ RSpec.describe AttachmentUploader do
     subject { uploader.instance_eval { assignment }}
     let(:assignment) { create(:assignment) }
 
-    context "model has a assignment method" do
+    context "model has an assignment method" do
       let(:model) { MockClass::FullUpFileKlass.new }
 
       before do
@@ -67,6 +67,37 @@ RSpec.describe AttachmentUploader do
     end
 
     context "model has no assignment method" do
+      it "returns nil" do
+        expect(subject).to be_nil
+      end
+    end
+  end
+
+  describe "#file_klass" do
+    subject { uploader.instance_eval { file_klass }}
+    let(:model) { MockClass::FullUpFileKlass.new }
+
+    it "formats the name of the file class" do
+      expect(subject.split("/").last).to eq "full_up_file_klasses"
+    end
+  end
+
+  describe "#owner_name" do
+    subject { uploader.instance_eval { owner_name }}
+
+    context "model has an owner_name method" do
+      let(:model) { MockClass::FullUpFileKlass.new }
+
+      before do
+        allow(model).to receive(:owner_name) { " herman   jeffberry " }
+      end
+
+      it "returns a string with the format of <owner_name_name-owner_name_id>" do
+        expect(subject).to eq "-herman---jeffberry-"
+      end
+    end
+
+    context "model has no owner_name method" do
       it "returns nil" do
         expect(subject).to be_nil
       end

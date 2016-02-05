@@ -37,7 +37,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   private
 
   def store_dir_pieces
-    [ "uploads", course, assignment, file_klass, owner ].compact
+    [ "uploads", course, assignment, file_klass, owner_name ].compact
   end
 
   def course
@@ -52,7 +52,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     model.class.to_s.underscore.pluralize
   end
 
-  def owner
+  def owner_name
     model.owner_name.gsub(/\s/, "-") if model.class.method_defined? :owner_name
   end
 
