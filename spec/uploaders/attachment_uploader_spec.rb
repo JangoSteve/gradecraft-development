@@ -49,4 +49,27 @@ RSpec.describe AttachmentUploader do
       expect(subject).to eq([ "uploads", "some-assignment", "dave-eversby" ])
     end
   end
+
+  describe "#assignment" do
+    subject { uploader.instance_eval { assignment }}
+    let(:assignment) { create(:assignment) }
+
+    context "model has a assignment method" do
+      let(:model) { MockClass::FullUpFileKlass.new }
+
+      before do
+        allow(model).to receive(:assignment) { assignment }
+      end
+
+      it "returns a string with the format of <assignment_name-assignment_id>" do
+        expect(subject).to eq("assignments/#{model.assignment.name.gsub(/\s/, "_").downcase[0..20]}-#{model.assignment.id}")
+      end
+    end
+
+    context "model has no assignment method" do
+      it "returns nil" do
+        expect(subject).to be_nil
+      end
+    end
+  end
 end
