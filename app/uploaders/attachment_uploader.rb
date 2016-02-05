@@ -17,9 +17,9 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     "uploads#{course}#{assignment}#{file_type}#{owner}"
 
     if Rails.env.development?
-      [ "uploads", ENV['AWS_S3_DEVELOPER_TAG'], course, assignment, file_type, owner ].compact.join("/")
+      [ ENV['AWS_S3_DEVELOPER_TAG'] ].concat(store_dir_pieces).join("/")
     else
-      [ "uploads", course, assignment, file_type, owner ].compact.join("/")
+      store_dir_pieces.join("/")
     end
   end
 
@@ -36,6 +36,10 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   private
 
+  def store_dir_pieces
+    [ "uploads", course, assignment, file_klass, owner ].compact
+  end
+
   def course
     "#{model.course.courseno}-#{model.course.id}" if model.class.method_defined? :course
   end
@@ -44,7 +48,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     "assignments/#{model.assignment.name.gsub(/\s/, "_").downcase[0..20]}-#{model.assignment.id}" if model.class.method_defined? :assignment
   end
 
-  def file_type
+  def file_klass
     model.class.to_s.underscore.pluralize
   end
 
