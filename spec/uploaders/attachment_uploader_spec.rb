@@ -135,4 +135,19 @@ RSpec.describe AttachmentUploader do
       end
     end
   end
+
+  describe "#filename_from_basename" do
+    subject { uploader.instance_eval { filename_from_basename }}
+    let(:time_now) { Date.parse("Oct 20 1999").to_time }
+    let(:file_basename) { "walter    was    acting%%$  #@ strange today%%%" }
+
+    before do
+      allow(Time).to receive(:now) { time_now }
+      allow(uploader).to receive(:file) { double(:file, basename: file_basename) }
+    end
+
+    it "uses the time in microseconds and formats the basename" do
+      expect(subject).to eq "#{time_now.to_i}_walter_was_acting_strange_today_"
+    end
+  end
 end
