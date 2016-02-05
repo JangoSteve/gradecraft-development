@@ -4,14 +4,13 @@ include Toolkits::Uploaders::AttachmentUploader
 
 RSpec.describe AttachmentUploader do
   let(:uploader) { AttachmentUploader.new(model, :file) }
-  let(:model) { double(SubmissionFile).as_null_object }
+  let(:model) { MockClass::FullUpFileKlass.new }
 
   describe "#course" do
     subject { uploader.instance_eval { course }}
     let(:course) { create(:course) }
 
     context "model has a course method" do
-      let(:model) { MockClass::FullUpFileKlass.new }
 
       before do
         allow(model).to receive(:course) { course }
@@ -23,6 +22,7 @@ RSpec.describe AttachmentUploader do
     end
 
     context "model has no course method" do
+      let(:model) { MockClass::EmptyFileKlass.new }
       it "returns nil" do
         expect(subject).to be_nil
       end
@@ -55,8 +55,6 @@ RSpec.describe AttachmentUploader do
     let(:assignment) { create(:assignment) }
 
     context "model has an assignment method" do
-      let(:model) { MockClass::FullUpFileKlass.new }
-
       before do
         allow(model).to receive(:assignment) { assignment }
       end
@@ -67,6 +65,7 @@ RSpec.describe AttachmentUploader do
     end
 
     context "model has no assignment method" do
+      let(:model) { MockClass::EmptyFileKlass.new }
       it "returns nil" do
         expect(subject).to be_nil
       end
@@ -75,7 +74,6 @@ RSpec.describe AttachmentUploader do
 
   describe "#file_klass" do
     subject { uploader.instance_eval { file_klass }}
-    let(:model) { MockClass::FullUpFileKlass.new }
 
     it "formats the name of the file class" do
       expect(subject.split("/").last).to eq "full_up_file_klasses"
@@ -86,8 +84,6 @@ RSpec.describe AttachmentUploader do
     subject { uploader.instance_eval { owner_name }}
 
     context "model has an owner_name method" do
-      let(:model) { MockClass::FullUpFileKlass.new }
-
       before do
         allow(model).to receive(:owner_name) { " herman   jeffberry " }
       end
@@ -98,6 +94,7 @@ RSpec.describe AttachmentUploader do
     end
 
     context "model has no owner_name method" do
+      let(:model) { MockClass::EmptyFileKlass.new }
       it "returns nil" do
         expect(subject).to be_nil
       end

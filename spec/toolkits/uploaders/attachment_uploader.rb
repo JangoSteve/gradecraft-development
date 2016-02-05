@@ -3,7 +3,7 @@ module Toolkits
     module AttachmentUploader
       module MockClass
         # being used to show behaviors when #course, #assignment, or #owner_name methods don't exist
-        class NakedFileKlass
+        class EmptyFileKlass
         end
 
         # being used to show behaviors when these methods are defined on the class
