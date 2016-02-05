@@ -155,7 +155,7 @@ RSpec.describe AttachmentUploader do
     subject { uploader.instance_eval { secure_token_name }}
     let(:uploader) { AttachmentUploader.new(model, :berry_pancakes) }
 
-    it "expects/uses a token named based on the #mounted_as value" do
+    it "pulls the mounted_at value from the AttachmentUploader" do
       expect(subject).to eq :"@berry_pancakes_secure_token"
     end
 
