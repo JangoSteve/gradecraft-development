@@ -100,4 +100,34 @@ RSpec.describe AttachmentUploader do
       end
     end
   end
+
+  describe "#tokenized_name" do
+    subject { uploader.instance_eval { tokenized_name }}
+    let(:secure_token_name) { RandomFile::Content.random_string(20) }
+    let(:secure_token_value) { RandomFile::Content.random_string(30) }
+    let(:random_filename) { RandomFile::Content.random_string(40) }
+
+    before(:each) do
+      allow(uploader).to receive_messages({
+        secure_token_name: :"@#{secure_token_name}",
+        filename_from_basename: random_filename
+      })
+    end
+
+    context "model has an instance variable with the secure_token_name" do
+      before { model.instance_variable_set(:"@#{secure_token_name}", secure_token_value) }
+
+      it "returns the value of the instance variable" do
+        expect(subject).to eq(secure_token_name)
+      end
+    end
+
+    context "model @secure_token_name is nil or isn't set" do
+      it "sets the secure token name as the filename_from_basename" do
+      end
+
+      it "returns the filename_from_basename" do
+      end
+    end
+  end
 end
