@@ -41,6 +41,38 @@ RSpec.describe AttachmentUploader do
     end
   end
 
+  describe "#filename" do
+    subject { uploader.filename }
+
+    context "original filename is present" do
+      before(:each) { allow(uploader).to receive(:original_filename) { "cool_filename_bro.txt" }}
+      let(:model) { MockClass::MountedClass.new }
+
+      context "model exists and has a mounted_as attribute" do
+        it "reads the mounted_as attribute from the model" do
+          expect(subject).to eq("mountable_something.pdf")
+        end
+      end
+
+      context "model doesn't exists or doesn't have a mounted_as attribute" do
+        before(:each) do
+          allow(uploader).to receive_messages(tokenized_name: "sweet_name", extension: double(:file, extension: "txt"))
+        end
+
+        it "uses the tokenized name with the extension of the associated file" do
+          expect(subject).to eq("sweet_name.txt")
+        end
+      end
+    end
+
+    context "original filename is not present" do
+      before { allow(uploader).to receive(:original_filename) { nil }}
+      it "returns nil" do
+        expect(subject).to be_nil
+      end
+    end
+  end
+
   describe "#store_dir_pieces" do
     subject { uploader.instance_eval { store_dir_pieces }}
     before(:each) { allow(uploader).to receive_messages(relation_defaults) }

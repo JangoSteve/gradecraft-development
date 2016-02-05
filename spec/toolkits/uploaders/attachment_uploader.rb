@@ -20,6 +20,12 @@ module Toolkits
           def owner_name
           end
         end
+
+        class MountedClass < FullUpFileKlass
+          def read_attribute(mounted_as)
+            "mountable_something.pdf" if mounted_as == :file
+          end
+        end
       end
     end
   end
