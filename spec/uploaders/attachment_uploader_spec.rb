@@ -1,7 +1,8 @@
 require 'rails_spec_helper'
 
 include Toolkits::Uploaders::AttachmentUploader
-include UniMock::Rails::Stub
+include UniMock::Rails
+include UniMock::Time
 
 RSpec.describe AttachmentUploader do
   let(:uploader) { AttachmentUploader.new(model, :file) }
@@ -162,16 +163,15 @@ RSpec.describe AttachmentUploader do
 
   describe "#filename_from_basename" do
     subject { uploader.instance_eval { filename_from_basename }}
-    let(:time_now) { Date.parse("Oct 20 1999").to_time }
     let(:file_basename) { "walter    was    acting%%$  #@ strange today%%%" }
 
     before do
-      allow(Time).to receive(:now) { time_now }
+      stub_now("Oct 20 1999")
       allow(uploader).to receive(:file) { double(:file, basename: file_basename) }
     end
 
     it "uses the time in microseconds and formats the basename" do
-      expect(subject).to eq "#{time_now.to_i}_walter_was_acting_strange_today_"
+      expect(subject).to eq "#{Time.now.to_i}_walter_was_acting_strange_today_"
     end
   end
 
