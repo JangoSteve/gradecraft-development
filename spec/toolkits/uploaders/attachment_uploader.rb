@@ -4,10 +4,13 @@ module Toolkits
       module MockClass
         # being used to show behaviors when #course, #assignment, or #owner_name methods don't exist
         class EmptyFileKlass
+          def id
+            @id ||= rand(1000)
+          end
         end
 
         # being used to show behaviors when these methods are defined on the class
-        class FullUpFileKlass
+        class FullUpFileKlass < EmptyFileKlass
           def course
           end
 

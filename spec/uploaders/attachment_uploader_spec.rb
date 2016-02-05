@@ -1,10 +1,55 @@
 require 'rails_spec_helper'
 
 include Toolkits::Uploaders::AttachmentUploader
+include UniMock::Rails::Stub
 
 RSpec.describe AttachmentUploader do
   let(:uploader) { AttachmentUploader.new(model, :file) }
   let(:model) { MockClass::FullUpFileKlass.new }
+  let(:relation_defaults) {{
+    course: "some-course",
+    assignment: "some-assignment",
+    file_klass: "devious_files",
+    owner_name: "dave-eversby"
+  }}
+
+  describe "#store_dir" do
+    subject { uploader.store_dir }
+    before(:each) { allow(uploader).to receive_messages(relation_defaults) }
+
+    context "env is development" do
+      before do
+        stub_env("development")
+        ENV['AWS_S3_DEVELOPER_TAG'] = "jeff-moses"
+      end
+
+      it "prepends the developer tag to the store dirs and joins them" do
+        expect(subject).to eq "jeff-moses/some-course/some-assignment/devious_files/dave-eversby"
+      end
+    end
+
+    context "env is anything but development" do
+      before { stub_env("werewolf-env") }
+
+      it "joins the store dirs and doesn't use the developer tag" do
+        expect(subject).to eq "some-course/some-assignment/devious_files/dave-eversby"
+      end
+    end
+  end
+
+  describe "#store_dir_pieces" do
+    subject { uploader.instance_eval { store_dir_pieces }}
+    before(:each) { allow(uploader).to receive_messages(relation_defaults) }
+
+    it "returns an array with those components" do
+      expect(subject).to eq([ "uploads", "some-course", "some-assignment", "devious_files", "dave-eversby" ])
+    end
+
+    it "compacts nils from the array" do
+      allow(uploader).to receive_messages(course: nil, file_klass: nil)
+      expect(subject).to eq([ "uploads", "some-assignment", "dave-eversby" ])
+    end
+  end
 
   describe "#course" do
     subject { uploader.instance_eval { course }}
@@ -26,27 +71,6 @@ RSpec.describe AttachmentUploader do
       it "returns nil" do
         expect(subject).to be_nil
       end
-    end
-  end
-
-  describe "#store_dir_pieces" do
-    subject { uploader.instance_eval { store_dir_pieces }}
-    before(:each) do
-      allow(uploader).to receive_messages({
-        course: "some-course",
-        assignment: "some-assignment",
-        file_klass: "devious_files",
-        owner_name: "dave-eversby"
-      })
-    end
-
-    it "returns an array with those components" do
-      expect(subject).to eq([ "uploads", "some-course", "some-assignment", "devious_files", "dave-eversby" ])
-    end
-
-    it "compacts nils from the array" do
-      allow(uploader).to receive_messages(course: nil, file_klass: nil)
-      expect(subject).to eq([ "uploads", "some-assignment", "dave-eversby" ])
     end
   end
 

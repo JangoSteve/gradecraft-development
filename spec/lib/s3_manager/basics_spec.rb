@@ -98,7 +98,7 @@ RSpec.describe S3Manager::Manager do
       it "should get an AWS Seahorse object in response" do
         expect(subject.class).to eq(Seahorse::Client::Response)
       end
-      
+
       it "should have been successful" do
         expect(subject.successful?).to be_truthy
       end
@@ -128,7 +128,7 @@ RSpec.describe S3Manager::Manager do
       it "should get an AWS Seahorse object in response" do
         expect(subject.class).to eq(Seahorse::Client::Response)
       end
-      
+
       it "should have been successful" do
         expect(subject.successful?).to be_truthy
       end
@@ -171,7 +171,7 @@ RSpec.describe S3Manager::Manager do
         it "should get an AWS Seahorse object in response" do
           expect(subject.class).to eq(Seahorse::Client::Response)
         end
-        
+
         it "should have been successful" do
           expect(subject.successful?).to be_truthy
         end
