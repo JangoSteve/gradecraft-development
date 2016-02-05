@@ -1,5 +1,7 @@
 require 'rails_spec_helper'
 
+include Toolkits::Uploaders::AttachmentUploader
+
 RSpec.describe AttachmentUploader do
   let(:uploader) { AttachmentUploader.new(model, :file) }
   let(:model) { double(SubmissionFile).as_null_object }
@@ -9,8 +11,7 @@ RSpec.describe AttachmentUploader do
     let(:course) { create(:course) }
 
     context "model has a course method" do
-      class FileKlassWithCourse; def course; end; end
-      let(:model) { FileKlassWithCourse.new }
+      let(:model) { MockClass::FullUpFileKlass.new }
 
       before do
         allow(model).to receive(:course) { course }
