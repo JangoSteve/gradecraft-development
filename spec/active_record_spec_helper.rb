@@ -63,6 +63,9 @@ CarrierWave.configure do |config|
   config.enable_processing = false
 end
 
+# Uploader classes for which #store_dir shouldn't be overwritten
+AttachmentUploader
+
 CarrierWave::Uploader::Base.descendants.each do |klass|
   next if klass.anonymous?
   klass.class_eval do
@@ -70,6 +73,7 @@ CarrierWave::Uploader::Base.descendants.each do |klass|
       File.join(File.dirname(__FILE__), "support/uploads/tmp")
     end
 
+    next if klass == AttachmentUploader
     def store_dir
       File.join(File.dirname(__FILE__), "support/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}")
     end

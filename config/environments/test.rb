@@ -13,11 +13,11 @@ GradeCraft::Application.configure do
   config.session_store :cookie_store, key: '_gradecraft_session', :expire_after => 60.minutes
 end
 
-
 CarrierWave.configure do |config|
-  config.storage = :file
+  config.storage = :fog
   config.enable_processing = false
 end
+
 
 # List tested uploaders here to make sure they are auto-loaded
 # This assures files are created in spec/support/uploads and can be deleted after tests
@@ -30,6 +30,7 @@ CarrierWave::Uploader::Base.descendants.each do |klass|
       "#{Rails.root}/spec/support/uploads/tmp"
     end
 
+    next if klass == AttachmentUploader
     def store_dir
       "#{Rails.root}/spec/support/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     end

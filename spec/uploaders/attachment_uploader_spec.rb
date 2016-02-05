@@ -4,6 +4,11 @@ include Toolkits::Uploaders::AttachmentUploader
 include UniMock::Rails
 include UniMock::Time
 
+class CarrierWave::Uploader::Base
+  def store_dir
+  end
+end
+
 RSpec.describe AttachmentUploader do
   let(:uploader) { AttachmentUploader.new(model, :file) }
   let(:model) { MockClass::FullUpFileKlass.new }
@@ -16,16 +21,19 @@ RSpec.describe AttachmentUploader do
 
   describe "#store_dir" do
     subject { uploader.store_dir }
-    before(:each) { allow(uploader).to receive_messages(relation_defaults) }
+    before(:each) do
+      allow(uploader).to receive_messages(relation_defaults)
+    end
 
     context "env is development" do
       before do
-        stub_env("development")
+        allow(Rails).to receive(:env) { ActiveSupport::StringInquirer.new("development") }
         ENV['AWS_S3_DEVELOPER_TAG'] = "jeff-moses"
       end
 
       it "prepends the developer tag to the store dirs and joins them" do
-        expect(subject).to eq "jeff-moses/some-course/some-assignment/devious_files/dave-eversby"
+        allow(uploader).to receive_messages(relation_defaults)
+        expect(subject).to eq "jeff-moses/uploads/some-course/some-assignment/devious_files/dave-eversby"
       end
     end
 
@@ -33,7 +41,7 @@ RSpec.describe AttachmentUploader do
       before { stub_env("werewolf-env") }
 
       it "joins the store dirs and doesn't use the developer tag" do
-        expect(subject).to eq "some-course/some-assignment/devious_files/dave-eversby"
+        expect(subject).to eq "uploads/some-course/some-assignment/devious_files/dave-eversby"
       end
     end
   end
