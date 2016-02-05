@@ -118,7 +118,7 @@ RSpec.describe AttachmentUploader do
       before { model.instance_variable_set(:"@#{secure_token_name}", secure_token_value) }
 
       it "returns the value of the instance variable" do
-        expect(subject).to eq(secure_token_name)
+        expect(subject).to eq(secure_token_value)
       end
     end
 
