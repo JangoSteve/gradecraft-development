@@ -122,11 +122,16 @@ RSpec.describe AttachmentUploader do
       end
     end
 
-    context "model @secure_token_name is nil or isn't set" do
+    context "model @secure_token_name is nil" do
+      before { model.instance_variable_set(:"@#{secure_token_name}", nil) }
+
       it "sets the secure token name as the filename_from_basename" do
+        subject
+        expect(model.instance_variable_get(:"@#{secure_token_name}")).to eq random_filename
       end
 
       it "returns the filename_from_basename" do
+        expect(subject).to eq random_filename
       end
     end
   end
