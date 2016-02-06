@@ -53,15 +53,7 @@ class SubmissionFile < ActiveRecord::Base
   end
 
   def exists_on_storage?
-    if Rails.env.development?
-      File.exist? public_url
-    else
-      S3Manager::Manager::ObjectSummary.new(s3_object_file_key, s3_manager).exists?
-    end
-  end
-
-  def public_url
-    "#{Rails.root}/public#{url}"
+    S3Manager::Manager::ObjectSummary.new(s3_object_file_key, s3_manager).exists?
   end
 
   def course

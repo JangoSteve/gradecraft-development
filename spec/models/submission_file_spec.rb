@@ -84,21 +84,6 @@ describe SubmissionFile do
     end
   end
 
-  describe "#public_url" do
-    it "uses the Rails root" do
-      expect(subject.public_url).to match(/#{Rails.root}/)
-    end
-
-    it "uses the public directory" do
-      expect(subject.public_url).to match("public")
-    end
-
-    it "uses the submission file url" do
-      allow(subject).to receive(:url) { "/great/scott.jpg" }
-      expect(subject.public_url).to match("/great/scott.jpg")
-    end
-  end
-
   describe "#course" do
     it "returns the course associated with the submission" do
       expect(subject.course).to eq(course)
