@@ -9,25 +9,10 @@ describe SubmissionFile do
 
   describe "#source_file_url" do
     subject { submission_file.source_file_url }
-    let(:submission_file) { build(:submission_file) }
 
-    before(:each) do
-      allow(submission_file).to receive(:public_url) { "/some/file/path/srsly.txt" }
+    it "uses the url method from S3File" do
       allow(submission_file).to receive(:url) { "http://werewolf.com" }
-    end
-
-    context "Rails environment is development" do
-      before { allow(Rails).to receive(:env) { ActiveSupport::StringInquirer.new("development") }}
-      it "uses the public url" do
-        expect(subject).to eq("/some/file/path/srsly.txt")
-      end
-    end
-
-    context "Rails env is anything but development" do
-      before { allow(Rails).to receive(:env) { ActiveSupport::StringInquirer.new("badgerenv") }}
-      it "uses the url method from S3File" do
-        expect(subject).to eq("http://werewolf.com")
-      end
+      expect(subject).to eq("http://werewolf.com")
     end
   end
 
@@ -80,27 +65,6 @@ describe SubmissionFile do
       subject
       expect(submission_file[:file_missing]).to be_truthy
       expect(submission_file[:last_confirmed_at]).to eq(someday)
-    end
-  end
-
-
-  describe "#write_source_binary_to_path" do
-    subject { submission_file.write_source_binary_to_path(target_path) }
-
-    let(:tmp_dir) { Dir.mktmpdir }
-    let(:target_path) { File.expand_path("something.txt", tmp_dir) }
-    let(:source_file_url) { File.expand_path("something_else.txt", tmp_dir) }
-    let(:source_file) { RandomFile::TextFile.new(source_file_url) }
-    let(:submission_file) { build(:submission_file) }
-
-    before do
-      source_file.write
-      allow(submission_file).to receive(:source_file_url) { source_file_url }
-    end
-
-    it "writes the source file to the target path" do
-      subject
-      expect(File.stat(target_path).size).to eq(File.stat(source_file_url).size)
     end
   end
 
