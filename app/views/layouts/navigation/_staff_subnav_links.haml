@@ -95,7 +95,7 @@
     %i.fa.fa-user-plus.fa-fw
     #{term_for :groups}
     - if current_course.groups_to_review_count > 0
-      %span.notification= current_course.groups_to_review_count
+      %div.notification-badge.staff-notification-badge= current_course.groups_to_review_count
 %li= link_to_unless_current raw('<i class="fa fa-user-secret fa-fw"></i> Staff'), staff_index_path
 
 %hr
