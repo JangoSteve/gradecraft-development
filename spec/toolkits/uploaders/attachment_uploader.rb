@@ -26,6 +26,12 @@ module Toolkits
             "mountable_something.pdf" if mounted_as == :file
           end
         end
+
+        class MountedClassWithoutAttribute < FullUpFileKlass
+          def read_attribute(mounted_as)
+            nil
+          end
+        end
       end
     end
   end
