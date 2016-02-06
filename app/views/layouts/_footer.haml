@@ -1,3 +1,8 @@
+.right
+  %ul.social
+    %li= link_to raw("<i class='fa fa-envelope fa-fw'></i>"), "mailto:help@gradecraft.com"
+    %li= link_to raw("<i class='fa fa-twitter fa-fw'></i>"), "https://twitter.com/gradecraft", :target => "_blank"
+    %li= link_to raw("<i class='fa fa-facebook fa-fw'></i>"), "https://facebook.com/gradecraft", :target => "_blank"
 .left
   %ul
     %li= link_to_unless_current "Features", features_path
@@ -7,9 +12,4 @@
     %li= link_to "Blog", "http://blog.gradecraft.com", :target => "_blank"
   %br
   .uppercase.small= "© 2012-#{Date.today.year} Regents of the University of Michigan"
-
-.right
-  %ul.social
-    %li= link_to raw("<i class='fa fa-envelope fa-fw'></i>"), "mailto:help@gradecraft.com"
-    %li= link_to raw("<i class='fa fa-twitter fa-fw'></i>"), "https://twitter.com/gradecraft", :target => "_blank"
-    %li= link_to raw("<i class='fa fa-facebook fa-fw'></i>"), "https://facebook.com/gradecraft", :target => "_blank"
+.clear
