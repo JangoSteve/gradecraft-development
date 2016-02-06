@@ -25,30 +25,26 @@ RSpec.describe "An S3File inheritor" do
 
   describe "#url" do
     subject(:each) { s3_file_cylon.url }
-    before do
+
+    let(:presigned_url) { double(:presigned_url).as_null_object }
+    let(:s3_object) { double(:s3_object).as_null_object }
+
+    before(:each) do
       allow(s3_file_cylon).to receive_message_chain(:file, :url) { "great url, bro" }
       allow(s3_file_cylon).to receive(:filepath) { "sumpin'" }
+      allow(s3_file_cylon).to receive(:s3_object) { s3_object }
+      allow(s3_object).to receive(:presigned_url) { presigned_url }
     end
 
-    context "Rails env is anything but development" do
-      let(:presigned_url) { double(:presigned_url).as_null_object }
-      let(:s3_object) { double(:s3_object).as_null_object }
-
-      before(:each) do
-        allow(s3_file_cylon).to receive(:s3_object) { s3_object }
-        allow(s3_object).to receive(:presigned_url) { presigned_url }
-      end
-
-      it "gets the presigned url for the s3 object" do
-        expect(s3_object).to receive(:presigned_url).with(:get, expires_in: 900)
-      end
-
-      it "converts all of that into a string" do
-        expect(presigned_url).to receive(:to_s)
-      end
-
-      after(:each) { subject }
+    it "gets the presigned url for the s3 object" do
+      expect(s3_object).to receive(:presigned_url).with(:get, expires_in: 900)
     end
+
+    it "converts all of that into a string" do
+      expect(presigned_url).to receive(:to_s)
+    end
+
+    after(:each) { subject }
   end
 
   describe "#s3_object" do

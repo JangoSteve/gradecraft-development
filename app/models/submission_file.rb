@@ -34,7 +34,6 @@ class SubmissionFile < ActiveRecord::Base
     ! exists_on_storage?
   end
 
-  # @mz todo: add specs
   def exists_on_storage?
     S3Manager::Manager::ObjectSummary.new(s3_object_file_key, s3_manager).exists?
   end
