@@ -12,12 +12,8 @@ module S3File
   include S3Manager::Basics
 
   def url
-    if Rails.env.development?
-      file.url
-    else
-      if s3_object
-        s3_object.presigned_url(:get, expires_in: 900).to_s
-      end
+    if s3_object
+      s3_object.presigned_url(:get, expires_in: 900).to_s
     end
   end
 

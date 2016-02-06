@@ -30,21 +30,12 @@ RSpec.describe "An S3File inheritor" do
       allow(s3_file_cylon).to receive(:filepath) { "sumpin'" }
     end
 
-    context "Rails env is development" do
-      before { allow(Rails).to receive_message_chain(:env, :development?) { true }}
-      it "returns the url of the file" do
-        expect(subject).to eq("great url, bro")
-        subject
-      end
-    end
-
     context "Rails env is anything but development" do
       let(:presigned_url) { double(:presigned_url).as_null_object }
       let(:s3_object) { double(:s3_object).as_null_object }
 
       before(:each) do
         allow(s3_file_cylon).to receive(:s3_object) { s3_object }
-        allow(Rails).to receive_message_chain(:env, :development?) { false }
         allow(s3_object).to receive(:presigned_url) { presigned_url }
       end
 
