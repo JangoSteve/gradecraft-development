@@ -10,6 +10,9 @@
   color: $color-grey-4
   background-color: $color-blue-4
 
+  .title
+    display: inline
+
   form
     display: inline
 
@@ -34,9 +37,19 @@
     clear: both
 
 @media (max-width: $media-small-max)
-  span#mc_embed_signup_scroll
-    .mc-field-group
+  .newsletter_bar
+    span#mc_embed_signup_scroll
+      .mc-field-group
+        display: block
+        input
+          width: 80%
+          height: 2.5rem
+          font-size: 1rem
+        margin-bottom: 1.5rem
+    .button
+      font-size: 1.2rem
+      padding: .75rem !important
+      width: auto !important
+    .title
       display: block
-      input
-        width: 80%
-      margin-bottom: 1rem
+      padding-bottom: .5rem
