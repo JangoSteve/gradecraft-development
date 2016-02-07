@@ -132,6 +132,21 @@ RSpec.describe "An S3File inheritor" do
     end
   end
 
+  describe "caching the store_dir before create", focus: true do
+    subject { create_submission_file }
+    let(:create_submission_file) { SubmissionFile.create }
+    let(:attachment_uploader) { AttachmentUploader.new }
+    before do
+      allow_any_instance_of(SubmissionFile).to receive(:file) { attachment_uploader }
+      allow(attachment_uploader).to receive(:store_dir) { "some-dir" }
+    end
+
+    it "caches the store_dir before create" do
+      subject
+      expect(create_submission_file[:store_dir]).to eq("some-dir")
+    end
+  end
+
   describe "#delete_from_s3" do
     subject { s3_file_cylon.delete_from_s3 }
 
