@@ -25,13 +25,14 @@
 
   .hero-section
     background:rgba(0,0,0,0.1)
-    padding: 40px 0 0
+    padding: 1rem 0 1rem
     h1
       font-size: 2.2rem
       color: $color-white
       font-weight: lighter
       width: 50%
-      margin: 3rem auto 1rem
+      height: 150px
+      margin: 2rem auto 1rem
     h3
       font-size: 1.1rem
       color: $color-white
@@ -39,52 +40,74 @@
       margin-top: 40px
       text-transform: none !important
   .feature-section
-    height: 450px
+    height: 50%
     padding: 2rem
     .image-container
       width: 100%
-      overflow-y: hidden
+      padding-top: 2%
     img
       position: relative
       height: 90%
       &.center-image
-        height: 40% !important
+        height: 40%
     &.white
       background-color: $color-white
     &.alternate-white
       background-color: lighten($color-blue-4, 20%)
     .text
-      padding-top: 5rem
-      line-height: 1.7rem
+      padding-top: 2%
+      line-height: 2.5rem
+      font-size: 1.5rem
     h2
       font-size: 1.8rem
       color: $color-blue-3
       font-weight: lighter
       margin-bottom: 1rem
-    h3
+    h4
       text-transform: none !important
-      margin-bottom: .5rem
+      margin: 1rem 0
     p
       margin: 0 auto
     .half
-      width: 48%
+      width: calc(50% - 1rem)
+      margin: 0 .5rem 0 .5rem !important
+      position: relative
 
 @media (max-width: $media-small-max)
   .features
+    .hero-section
+      margin-top: 4rem
+      h1
+        margin-top: 3rem
     .feature-section
       height: auto !important
-
-      img, .text
+      .image-container
+        margin: 0 auto
+        padding: 0 !important
+      img, .text, .center-image
         margin-top: 0
-        padding-top: 0 !important
+        padding: 0 !important
+        max-width: 100%
+        height: auto !important
       .half
         width: 100% !important
 
 @media (max-width: $media-medium-max)
-  .features
+  .logged-out .features
     .hero-section
-      padding-top: 5rem
+      margin-top: 1%
       h1
         font-size: 1.5rem !important
-  .feature-section img
-    margin-top: 3rem !important
+        height: 50px !important
+        padding-bottom: 1rem
+  .features
+    .feature-section
+      .half
+        margin: 0 auto !important
+      img
+        margin-top: 1%
+    .text
+      font-size: 1rem !important
+      line-height: 1.75rem !important
+      margin: 0 auto !important
+      padding: 0  !important
