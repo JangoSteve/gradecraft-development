@@ -28,6 +28,10 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     end
   end
 
+  def filepath
+    "waffles"
+  end
+
   private
 
   def store_dir_pieces
