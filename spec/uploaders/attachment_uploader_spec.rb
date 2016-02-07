@@ -160,7 +160,7 @@ RSpec.describe AttachmentUploader do
       end
 
       it "returns a string with the format of <owner_name_name-owner_name_id>" do
-        expect(subject).to eq "-herman---jeffberry-"
+        expect(subject).to eq " herman   jeffberry "
       end
     end
 
