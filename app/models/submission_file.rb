@@ -3,6 +3,8 @@ class SubmissionFile < ActiveRecord::Base
 
   attr_accessible :file, :filename, :filepath, :submission_id, :file_missing, :last_confirmed_at
 
+  before_create :cache_filepath
+
   belongs_to :submission
 
   mount_uploader :file, AttachmentUploader
@@ -17,6 +19,7 @@ class SubmissionFile < ActiveRecord::Base
   scope :confirmed, -> { where("last_confirmed_at is not null") }
   scope :missing, -> { where(file_missing: true) }
   scope :present, -> { where(file_missing: false) }
+
 
   def s3_manager
     @s3_manager ||= S3Manager::Manager.new
@@ -56,5 +59,11 @@ class SubmissionFile < ActiveRecord::Base
 
   def extension
     File.extname(filename)
+  end
+
+  private
+
+  def cache_filepath
+    self[:filepath] = file.store_dir
   end
 end

@@ -22,7 +22,13 @@ module S3File
   end
 
   def s3_object_file_key
-    filepath.present? ? CGI::unescape(filepath) : file.path
+    if cached_file_path
+      cached_file_path # build a full file path from cached #store_dir and #filename attributes on the FooFile record
+    elsif filepath.present?
+      CGI::unescape(filepath)
+    else
+      file.path
+    end
   end
 
   def delete_from_s3
@@ -33,7 +39,13 @@ module S3File
     s3_object.exists?
   end
 
-  private
+  def cached_file_path
+    if store_dir and filename
+      @cached_file_path ||= [ store_dir, filename ].join("/")
+    end
+  end
+
+  protected
 
   def strip_path
     if filepath.present?
