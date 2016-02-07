@@ -1,4 +1,5 @@
 require 'rails_spec_helper'
+require 'active_record_spec_helper'
 
 RSpec.describe "An S3File inheritor" do
   subject { s3_file_cylon }
@@ -122,7 +123,7 @@ RSpec.describe "An S3File inheritor" do
     end
   end
 
-  describe "#cache_store_dir", focus: true do
+  describe "#cache_store_dir" do
     subject { s3_file_cylon.instance_eval { cache_store_dir }}
     before { allow(s3_file_cylon).to receive(:file) { double(:file, store_dir: "some-dir") }}
 
@@ -132,18 +133,10 @@ RSpec.describe "An S3File inheritor" do
     end
   end
 
-  describe "caching the store_dir before create", focus: true do
-    subject { create_submission_file }
-    let(:create_submission_file) { SubmissionFile.create }
-    let(:attachment_uploader) { AttachmentUploader.new }
-    before do
-      allow_any_instance_of(SubmissionFile).to receive(:file) { attachment_uploader }
-      allow(attachment_uploader).to receive(:store_dir) { "some-dir" }
-    end
-
+  describe "caching the store_dir before create" do
     it "caches the store_dir before create" do
-      subject
-      expect(create_submission_file[:store_dir]).to eq("some-dir")
+      submission_file = create(:submission_file)
+      expect(submission_file.store_dir).not_to be_nil
     end
   end
 

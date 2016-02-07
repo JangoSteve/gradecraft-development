@@ -18,7 +18,6 @@ CarrierWave.configure do |config|
   config.enable_processing = false
 end
 
-
 # List tested uploaders here to make sure they are auto-loaded
 # This assures files are created in spec/support/uploads and can be deleted after tests
 AttachmentUploader

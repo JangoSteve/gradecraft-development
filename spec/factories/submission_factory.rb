@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :submission do
     association :assignment
     text_comment "needs a link, file, or text comment to be valid"
+    association :student, factory: :user
 
     factory :submission_with_submission_files do
       submission_files { create_list(:present_submission_file, 2) }
