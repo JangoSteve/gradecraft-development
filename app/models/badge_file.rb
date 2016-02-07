@@ -1,5 +1,5 @@
 class BadgeFile < ActiveRecord::Base
-  include S3File
+  include S3Manager::Carrierwave
 
   attr_accessible :file, :filename, :filepath, :badge_id
 

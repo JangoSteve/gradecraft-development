@@ -53,19 +53,19 @@ describe GradeFile do
     expect expect(subject.url).to match(/.*\/uploads\/grade_file\/file\/#{subject.id}\/\d+_too_long__strange_characters__and_spaces_\.jpg/)
   end
 
-  describe "#course" do 
-    it 'returns the associated course' do 
+  describe "#course" do
+    it 'returns the associated course' do
       expect(subject.course).to eq(course)
     end
   end
 
-  describe "#assignment" do 
-    it 'returns the associated assignment' do 
+  describe "#assignment" do
+    it 'returns the associated assignment' do
       expect(subject.assignment).to eq(assignment)
     end
   end
 
-  describe "S3File inclusion" do
+  describe "S3Manager::Carrierwave inclusion" do
     let(:grade_file) { build(:grade_file) }
 
     it "can be deleted from s3" do

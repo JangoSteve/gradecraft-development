@@ -51,7 +51,7 @@ describe ChallengeFile do
     expect expect(subject.url).to match(/.*\/uploads\/challenge_file\/file\/#{subject.id}\/\d+_too_long__strange_characters__and_spaces_\.jpg/)
   end
 
-  describe "S3File inclusion" do
+  describe "S3Manager::Carrierwave inclusion" do
     let(:challenge_file) { build(:challenge_file) }
 
     it "can be deleted from s3" do

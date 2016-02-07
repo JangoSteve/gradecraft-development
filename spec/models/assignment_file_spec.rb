@@ -51,15 +51,15 @@ describe AssignmentFile do
       match(/.*\/uploads\/assignment_file\/file\/#{subject.id}\/\d+_too_long__strange_characters__and_spaces_\.jpg/)
   end
 
-  describe "#course" do 
-    it 'returns the associated course' do 
+  describe "#course" do
+    it 'returns the associated course' do
       course = create(:course)
       assignment.course = course
       expect(subject.course).to eq(course)
     end
   end
 
-  describe "S3File inclusion" do
+  describe "S3Manager::Carrierwave inclusion" do
     let(:assignment_file) { build(:assignment_file) }
 
     it "can be deleted from s3" do

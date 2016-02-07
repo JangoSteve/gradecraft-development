@@ -1,6 +1,6 @@
 require 'rails_spec_helper'
 
-RSpec.describe "An S3File inheritor" do
+RSpec.describe S3Manager::Carrierwave do
   subject { s3_file_cylon }
 
   let(:s3_file_cylon) { SubmissionFile.new }
