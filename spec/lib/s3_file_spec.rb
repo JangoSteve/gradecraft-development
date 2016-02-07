@@ -97,6 +97,31 @@ RSpec.describe "An S3File inheritor" do
     end
   end
 
+  describe "#cached_file_path" do
+    subject { s3_file_cylon.cached_file_path }
+    before do
+      allow(s3_file_cylon).to receive_messages(store_dir: "great_dir", filename: "stuff.txt")
+    end
+
+    context "both store_dir and filename exist" do
+      it "joins the store_dir and the filename with a forward slash" do
+        expect(subject).to eq "great_dir/stuff.txt"
+      end
+
+      it "caches the joined cached_file_path value" do
+        first_call = subject
+        expect(first_call.object_id).to eq(subject.object_id)
+      end
+    end
+
+    context "either store_dir or filename does not exist" do
+      before { allow(s3_file_cylon).to receive(:store_dir) { nil }}
+      it "returns nil" do
+        expect(subject).to be_nil
+      end
+    end
+  end
+
   describe "#delete_from_s3" do
     subject { s3_file_cylon.delete_from_s3 }
 
