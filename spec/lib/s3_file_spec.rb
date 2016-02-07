@@ -122,6 +122,16 @@ RSpec.describe "An S3File inheritor" do
     end
   end
 
+  describe "#cache_store_dir", focus: true do
+    subject { s3_file_cylon.instance_eval { cache_store_dir }}
+    before { allow(s3_file_cylon).to receive(:file) { double(:file, store_dir: "some-dir") }}
+
+    it "caches the store_dir attribute" do
+      subject
+      expect(s3_file_cylon[:store_dir]).to eq("some-dir")
+    end
+  end
+
   describe "#delete_from_s3" do
     subject { s3_file_cylon.delete_from_s3 }
 
