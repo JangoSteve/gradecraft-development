@@ -122,7 +122,7 @@ RSpec.describe "An S3File inheritor" do
     end
   end
 
-  describe "#cache_store_dir", focus: true do
+  describe "#cache_store_dir" do
     subject { s3_file_cylon.instance_eval { cache_store_dir }}
     before { allow(s3_file_cylon).to receive(:file) { double(:file, store_dir: "some-dir") }}
 
@@ -132,7 +132,7 @@ RSpec.describe "An S3File inheritor" do
     end
   end
 
-  describe "caching the store_dir before create", focus: true do
+  describe "caching the store_dir before create" do
     let(:create_submission_file) { create(:submission_file) }
     before do
       allow_any_instance_of(AttachmentUploader).to receive(:store_dir) { "some-dir" }
