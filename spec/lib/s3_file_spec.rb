@@ -1,15 +1,9 @@
 require 'rails_spec_helper'
 
-# a cylon looks exactly the same, but is not the same.
-# the whole point of the cylon is to include the S3File.
-class S3FileCylon
-  include S3File
-end
-
 RSpec.describe "An S3File inheritor" do
   subject { s3_file_cylon }
 
-  let(:s3_file_cylon) { S3FileCylon.new }
+  let(:s3_file_cylon) { SubmissionFile.new }
   let(:s3_manager) { S3Manager::Manager.new }
   let(:source_object) { Tempfile.new('walter-srsly') }
   let(:s3_object_key) { "lets-see-what-happens.txt" }
@@ -71,8 +65,16 @@ RSpec.describe "An S3File inheritor" do
   end
 
   describe "#s3_object_file_key" do
-    let(:tempfile) { Tempfile.new('walter') }
     subject { s3_file_cylon.s3_object_file_key }
+    let(:tempfile) { Tempfile.new('walter') }
+
+    context "cached_file_path is present" do
+      before { allow(s3_file_cylon).to receive(:cached_file_path) { "/some/great/path.png" }}
+
+      it "returns the cached file path" do
+        expect(subject).to eq "/some/great/path.png"
+      end
+    end
 
     context "filepath is present" do
       before { allow(s3_file_cylon).to receive(:filepath) { tempfile }}

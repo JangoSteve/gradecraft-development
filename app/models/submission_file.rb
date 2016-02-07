@@ -3,8 +3,6 @@ class SubmissionFile < ActiveRecord::Base
 
   attr_accessible :file, :filename, :filepath, :submission_id, :file_missing, :last_confirmed_at
 
-  before_create :cache_filepath
-
   belongs_to :submission
 
   mount_uploader :file, AttachmentUploader
@@ -59,11 +57,5 @@ class SubmissionFile < ActiveRecord::Base
 
   def extension
     File.extname(filename)
-  end
-
-  private
-
-  def cache_filepath
-    self[:filepath] = file.store_dir
   end
 end

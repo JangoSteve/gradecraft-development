@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131155433) do
+ActiveRecord::Schema.define(version: 20160207122312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20160131155433) do
     t.boolean  "file_processing",             default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "store_dir"
   end
 
   create_table "assignment_groups", force: :cascade do |t|
@@ -148,6 +149,7 @@ ActiveRecord::Schema.define(version: 20160131155433) do
     t.boolean  "file_processing",             default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "store_dir"
   end
 
   create_table "badges", force: :cascade do |t|
@@ -176,6 +178,7 @@ ActiveRecord::Schema.define(version: 20160131155433) do
     t.boolean  "file_processing",             default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "store_dir"
   end
 
   create_table "challenge_grades", force: :cascade do |t|
@@ -391,6 +394,7 @@ ActiveRecord::Schema.define(version: 20160131155433) do
     t.boolean  "file_processing",             default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "store_dir"
   end
 
   create_table "grade_scheme_elements", force: :cascade do |t|
@@ -585,6 +589,7 @@ ActiveRecord::Schema.define(version: 20160131155433) do
     t.datetime "updated_at"
     t.datetime "last_confirmed_at"
     t.boolean  "file_missing",                  default: false
+    t.string   "store_dir"
   end
 
   create_table "submissions", force: :cascade do |t|

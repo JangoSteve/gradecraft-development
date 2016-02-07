@@ -1,13 +1,19 @@
 require_relative "s3_manager"
 
+# Meant for inclusion in ActiveRecord files that are persisting CarrierWave objects via S3
 module S3File
+  extend ActiveSupport::Concern
 
   # Legacy submission files were handled by S3 direct upload and we stored their
   # Amazon key in the "filepath" field. Here we check if it has a value, and if
   # so we use this to retrieve our secure url. If not, we use the path supplied by
   # the carrierwave uploader
 
-  attr_accessor :process_file_upload
+  attr_accessor :process_file_upload, :store_dir
+
+  included do
+    before_create :cache_store_dir
+  end
 
   include S3Manager::Basics
 
@@ -21,6 +27,14 @@ module S3File
     bucket.object(s3_object_file_key)
   end
 
+  def delete_from_s3
+    s3_object.delete
+  end
+
+  def exists_on_s3?
+    s3_object.exists?
+  end
+
   def s3_object_file_key
     if cached_file_path
       cached_file_path # build a full file path from cached #store_dir and #filename attributes on the FooFile record
@@ -31,14 +45,6 @@ module S3File
     end
   end
 
-  def delete_from_s3
-    s3_object.delete
-  end
-
-  def exists_on_s3?
-    s3_object.exists?
-  end
-
   def cached_file_path
     if store_dir and filename
       @cached_file_path ||= [ store_dir, filename ].join("/")
@@ -46,6 +52,10 @@ module S3File
   end
 
   protected
+
+  def cache_store_dir
+    self[:store_dir] = file.store_dir
+  end
 
   def strip_path
     if filepath.present?
