@@ -7,7 +7,7 @@ describe SubmissionFile do
   let(:submission) { build(:submission, course: course, assignment: assignment, student: student) }
   let(:submission_file) { submission.submission_files.last }
   let(:new_submission_file) do
-    submission.submission_files.new filename: "test", file: fixture_file('test_image.jpg', 'img/jpg')
+    submission.submission_files.new file: fixture_file('test_image.jpg', 'img/jpg')
   end
 
   subject { new_submission_file }
@@ -108,7 +108,7 @@ describe SubmissionFile do
       group = build(:group, name: "Group Name")
       group_assignment = build(:assignment, grade_scope: "Group")
       group_submission = build(:submission, course: course, assignment: group_assignment, group: group)
-      group_file = group_submission.submission_files.new(filename: "test", file: fixture_file('test_image.jpg', 'img/jpg'))
+      group_file = group_submission.submission_files.new(file: fixture_file('test_image.jpg', 'img/jpg'))
       expect(group_file.owner_name).to eq("Group-Name")
     end
   end
@@ -137,7 +137,7 @@ describe SubmissionFile do
 
   describe "uploading multiple files" do
     it "accepts multiple files" do
-      submission.submission_files.new(filename: "test", filepath: 'uploads/submission_file/', file: fixture_file('test_file.txt', 'img/jpg'))
+      submission.submission_files.new(filepath: 'uploads/submission_file/', file: fixture_file('test_file.txt', 'img/jpg'))
       subject.submission.save!
       expect(submission.submission_files.count).to equal 2
     end

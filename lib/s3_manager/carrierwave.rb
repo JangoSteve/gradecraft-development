@@ -8,7 +8,7 @@ module S3Manager
     # so we use this to retrieve our secure url. If not, we use the path supplied by
     # the carrierwave uploader
 
-    attr_accessor :process_file_upload, :store_dir
+    attr_accessor :process_file_upload, :store_dir, :filename
 
     included do
       before_create :cache_store_dir
@@ -45,9 +45,14 @@ module S3Manager
     end
 
     def cached_file_path
-      if store_dir and filename
-        @cached_file_path ||= [ store_dir, filename ].join("/")
+      if store_dir and mounted_filename
+        @cached_file_path ||= [ store_dir, mounted_filename ].join("/")
       end
+    end
+
+    # @mz todo: add specs
+    def mounted_filename
+      read_attribute(mounted_as)
     end
 
     protected

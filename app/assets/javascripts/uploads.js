@@ -19,10 +19,12 @@
     }
     $('.s3_uploader').bind('s3_upload_complete', function (e, content) {
       if ($('.s3_files').val()) {
+
         var field = $('.s3_files').first().clone()
         field = formatSubmissionField(field, $('.s3_files').length)
         $('.s3_files').parent().append(field)
         $('.s3_files').last().val(content.filepath)
+
       } else {
         $('.s3_files').val(content.filepath)
       }
