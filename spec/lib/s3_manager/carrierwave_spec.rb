@@ -102,6 +102,16 @@ RSpec.describe S3Manager::Carrierwave do
     end
   end
 
+  describe "#mounted_filename" do
+    subject { mounted_submission_file.mounted_filename }
+    let(:mounted_submission_file) { create(:submission_file, filepath: "this-is-great.txt") }
+    before { allow(mounted_submission_file).to receive_message_chain(:file, :mounted_as) { :filepath }}
+
+    it "returns the value for the #mounted_as attribute" do
+      expect(subject).to eq("this-is-great.txt")
+    end
+  end
+
   describe "#cached_file_path" do
     subject { s3_file_cylon.cached_file_path }
     before do

@@ -48,7 +48,6 @@ module S3Manager
       @cached_file_path ||= [ store_dir, mounted_filename ].join("/")
     end
 
-    # @mz todo: add specs
     def mounted_filename
       read_attribute(file.mounted_as)
     end
