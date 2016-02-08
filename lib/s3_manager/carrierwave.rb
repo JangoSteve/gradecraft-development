@@ -37,7 +37,7 @@ module S3Manager
     def s3_object_file_key
       if cached_file_path
         cached_file_path # build a full file path from cached #store_dir and #filename attributes on the FooFile record
-      elsif filepath.present?
+      elsif filepath_includes_filename?
         CGI::unescape(filepath)
       else
         file.path
@@ -53,6 +53,11 @@ module S3Manager
     # @mz todo: add specs
     def mounted_filename
       read_attribute(mounted_as)
+    end
+
+    # @mz todo: add specs
+    def filepath_includes_filename?
+      filepath.present? and filepath.match(filename)
     end
 
     protected
