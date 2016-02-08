@@ -1,9 +1,14 @@
-require "active_record_spec_helper"
+require "rails_spec_helper"
 
 describe AssignmentFile do
   let(:assignment) { build(:assignment) }
 
-  subject { assignment.assignment_files.new(filename: "test", file: fixture_file('test_image.jpg', 'img/jpg')) }
+  subject { new_assignment_file }
+  let(:new_assignment_file) { assignment.assignment_files.new image_file_attrs }
+
+  extend Toolkits::Models::Shared::Files
+  define_context # pull in attrs for image and text files
+
 
   describe "validations" do
     it "requires a filename" do
@@ -26,29 +31,35 @@ describe AssignmentFile do
     end
   end
 
-  it "accepts text files as well as images" do
-    subject.file = fixture_file('test_file.txt', 'txt')
-    subject.assignment.save!
-    expect expect(subject.url).to match(/.*\/uploads\/assignment_file\/file\/#{subject.id}\/\d+_test_file\.txt/)
+  describe "formatting name of mounted file" do
+    subject { new_assignment_file.read_attribute(:file) }
+    let(:save_assignment) { new_assignment_file.assignment.save! }
+
+    it "accepts text files as well as images" do
+      new_assignment_file.file = fixture_file('test_file.txt', 'txt')
+      save_assignment
+      expect expect(subject).to match(/\d+_test_file\.txt/)
+    end
+
+    it "has an accessible url" do
+      save_assignment
+      expect expect(subject).to match(/\d+_test_image\.jpg/)
+    end
+
+    it "shortens and removes non-word characters from file names on save" do
+      new_assignment_file.file = fixture_file('Too long, strange characters, and Spaces (In) Name.jpg', 'img/jpg')
+      save_assignment
+      expect(subject).to match(/\d+_too_long__strange_characters__and_spaces_\.jpg/)
+    end
   end
 
-  it "accepts multiple files" do
-    assignment.assignment_files.new(filename: "test", file: fixture_file('test_file.txt', 'img/jpg'))
-    subject.assignment.save!
-    expect(assignment.assignment_files.count).to equal 2
-  end
+  describe "url" do
+    subject { new_assignment_file.url }
+    before { allow(new_assignment_file).to receive_message_chain(:s3_object, :presigned_url) { "http://some.url" }}
 
-  it "has an accessible url" do
-    subject.assignment.save!
-    expect expect(subject.url).to \
-      match(/.*\/uploads\/assignment_file\/file\/#{subject.id}\/\d+_test_image\.jpg/)
-  end
-
-  it "shortens and removes non-word characters from file names on save" do
-    subject.file = fixture_file('Too long, strange characters, and Spaces (In) Name.jpg', 'img/jpg')
-    subject.assignment.save!
-    expect expect(subject.url).to \
-      match(/.*\/uploads\/assignment_file\/file\/#{subject.id}\/\d+_too_long__strange_characters__and_spaces_\.jpg/)
+    it "returns the presigned amazon url" do
+      expect(subject).to eq("http://some.url")
+    end
   end
 
   describe "#course" do
