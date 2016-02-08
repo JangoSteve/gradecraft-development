@@ -72,6 +72,13 @@
       width: calc(50% - 1rem)
       margin: 0 .5rem 0 .5rem !important
       position: relative
+    .whole
+      margin 0 auto
+      width: 100%
+      text-align: center
+      p
+        width: 75%
+        font-size: 1.5rem
 
 @media (max-width: $media-small-max)
   .features
@@ -91,6 +98,10 @@
         height: auto !important
       .half
         width: 100% !important
+      .whole
+        p
+          width: 100%
+          font-size: 1rem
 
 @media (max-width: $media-medium-max)
   .logged-out .features
@@ -106,8 +117,12 @@
         margin: 0 auto !important
       img
         margin-top: 1%
-    .text
-      font-size: 1rem !important
-      line-height: 1.75rem !important
-      margin: 0 auto !important
-      padding: 0  !important
+      .text
+        font-size: 1rem !important
+        line-height: 1.75rem !important
+        margin: 0 auto !important
+        padding: 0  !important
+      .whole
+        p
+          width: 100%
+          font-size: 1rem !important
