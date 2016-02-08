@@ -6,8 +6,11 @@ describe SubmissionFile do
   let(:student) { build(:user, last_name: "de Kooning", first_name: "Willem") }
   let(:submission) { build(:submission, course: course, assignment: assignment, student: student) }
   let(:submission_file) { submission.submission_files.last }
+  let(:new_submission_file) do
+    submission.submission_files.new filename: "test", file: fixture_file('test_image.jpg', 'img/jpg')
+  end
 
-  subject { submission.submission_files.new(filename: "test", file: fixture_file('test_image.jpg', 'img/jpg')) }
+  subject { new_submission_file }
 
   describe "validations" do
     it { is_expected.to be_valid }
@@ -132,33 +135,37 @@ describe SubmissionFile do
     end
   end
 
-  it "accepts text files as well as images" do
-    subject.file = fixture_file('test_file.txt', 'txt')
-    subject.submission.save!
-    expect expect(subject.url).to match(/.*\/uploads\/submission_file\/file\/#{subject.id}\/\d+_test_file\.txt/)
+  describe "uploading multiple files" do
+    it "accepts multiple files" do
+      submission.submission_files.new(filename: "test", filepath: 'uploads/submission_file/', file: fixture_file('test_file.txt', 'img/jpg'))
+      subject.submission.save!
+      expect(submission.submission_files.count).to equal 2
+    end
   end
 
-  it "accepts multiple files" do
-    submission.submission_files.new(filename: "test", filepath: 'uploads/submission_file/', file: fixture_file('test_file.txt', 'img/jpg'))
-    subject.submission.save!
-    expect(submission.submission_files.count).to equal 2
+  describe "formatting filenames" do
+    subject { new_submission_file.filename }
+    let(:save_submission) { new_submission_file.submission.save! }
+
+    it "accepts text files as well as images" do
+      new_submission_file.file = fixture_file('test_file.txt', 'txt')
+      save_submission
+      expect expect(subject).to match(/\d+_test_file\.txt/)
+    end
+
+    it "has an accessible url" do
+      save_submission
+      expect expect(subject).to match(/\d+_test_image\.jpg/)
+    end
+
+    it "shortens and removes non-word characters from file names on save" do
+      new_submission_file.file = fixture_file('Too long, strange characters, and Spaces (In) Name.jpg', 'img/jpg')
+      save_submission
+      expect(subject).to match(/\d+_too_long__strange_characters__and_spaces_\.jpg/)
+    end
   end
 
-  it "has an accessible url" do
-    subject.submission.save!
-    expect expect(subject.url).to match(/.*\/uploads\/submission_file\/file\/#{subject.id}\/\d+_test_image\.jpg/)
-  end
-
-  it "shortens and removes non-word characters from file names on save" do
-    subject.file = fixture_file('Too long, strange characters, and Spaces (In) Name.jpg', 'img/jpg')
-    subject.submission.save!
-    expect(subject.url).to match(/.*\/uploads\/submission_file\/file\/#{subject.id}\/\d+_too_long__strange_characters__and_spaces_\.jpg/)
-  end
-
-  it "shortens and removes non-word characters from file names on save" do
-    subject.file = fixture_file('Too long, strange characters, and Spaces (In) Name.jpg', 'img/jpg')
-    subject.submission.save!
-    expect(subject.url).to match(/.*\/uploads\/submission_file\/file\/#{submission_file.id}\/\d+_too_long__strange_characters__and_spaces_\.jpg/)
+  describe "url" do
   end
 
   describe "S3Manager::Carrierwave inclusion" do
