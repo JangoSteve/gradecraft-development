@@ -35,7 +35,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   end
 
   def course
-    "#{model.course.courseno}-#{model.course.id}" if model.class.method_defined? :course
+    "#{model.course.courseno}-#{model.course.id}" if model and model.class.method_defined? :course
   end
 
   def assignment
