@@ -50,7 +50,7 @@ describe SubmissionsController do
       end
 
       it "manages submission file uploads" do
-        params = attributes_for(:submission)
+        params = attributes_for(:submission).merge(student_id: @student.id)
         params.merge! submission_files_attributes: {"0" => {file: [fixture_file('test_file.txt', 'txt')]}}
         post :create, assignment_id: @assignment.id, submission: params
         submission = Submission.unscoped.last
