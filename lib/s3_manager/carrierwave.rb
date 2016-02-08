@@ -8,7 +8,7 @@ module S3Manager
     # so we use this to retrieve our secure url. If not, we use the path supplied by
     # the carrierwave uploader
 
-    attr_accessor :process_file_upload, :store_dir, :filename
+    attr_accessor :process_file_upload, :store_dir
 
     included do
       before_create :cache_store_dir
