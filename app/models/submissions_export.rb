@@ -25,8 +25,25 @@ class SubmissionsExport < ActiveRecord::Base
 
   before_create :set_s3_bucket_name
 
-  def build_s3_object_key(s3_object_filename)
-    "exports/courses/#{course_id}/assignments/#{assignment_id}/#{created_at_date}/#{created_at_in_microseconds}/#{s3_object_filename}"
+  def build_s3_object_key(object_filename)
+    if Rails.env.development?
+      [ ENV['AWS_S3_DEVELOPER_TAG'] ].concat(s3_object_key_pieces(object_filename)).join("/")
+    else
+      s3_object_key_pieces(object_filename).join("/")
+    end
+  end
+
+  def s3_object_key_pieces(object_filename)
+    [
+      "exports",
+      "courses",
+      course_id,
+      "assignments",
+      assignment_id,
+      created_at_date,
+      created_at_in_microseconds,
+      object_filename
+    ]
   end
 
   def presigned_s3_url

@@ -56,7 +56,7 @@ RSpec.describe SubmissionsExport do
       expect(subject).to eq(submissions_export.created_at.strftime("%F"))
     end
   end
-  
+
   describe "#created_at_in_microseconds" do
     let(:submissions_export) { create(:submissions_export) }
     subject { submissions_export.created_at_in_microseconds }
@@ -84,14 +84,46 @@ RSpec.describe SubmissionsExport do
 
   describe "#build_s3_object_key" do
     let(:submissions_export) { create(:submissions_export) }
+    let(:expected_base_s3_key) { "exports/courses/40/assignments/50/#{submissions_export.created_at_date}/#{submissions_export.created_at_in_microseconds}/stuff.zip" }
     subject { submissions_export.build_s3_object_key("stuff.zip") }
 
-    before do
+    before(:each) do
       allow(submissions_export).to receive_messages(course_id: 40, assignment_id: 50)
+      ENV['AWS_S3_DEVELOPER_TAG'] = "jeff-moses"
     end
 
-    it "uses the correct object key" do
-      expect(subject).to eq("exports/courses/40/assignments/50/#{submissions_export.created_at_date}/#{submissions_export.created_at_in_microseconds}/stuff.zip")
+    context "env is development" do
+      before do
+        allow(Rails).to receive(:env) { ActiveSupport::StringInquirer.new("development") }
+      end
+
+      it "prepends the developer tag to the store dirs and joins them" do
+        expect(subject).to eq ["jeff-moses", expected_base_s3_key].join("/")
+      end
+    end
+
+    context "env is anything but development" do
+      it "joins the store dirs and doesn't use the developer tag" do
+        expect(subject).to eq expected_base_s3_key
+      end
+    end
+  end
+
+  describe "#s3_object_key_pieces" do
+    subject { submissions_export.s3_object_key_pieces("stuff.zip") }
+    let(:submissions_export) { create(:submissions_export) }
+    let(:expected_object_key_pieces) do
+      [
+        "exports", "courses", 40, "assignments", 50,
+        submissions_export.created_at_date,
+        submissions_export.created_at_in_microseconds,
+        "stuff.zip"
+      ]
+    end
+
+    it "returns the expected pieces" do
+      allow(submissions_export).to receive_messages(course_id: 40, assignment_id: 50)
+      expect(subject).to eq(expected_object_key_pieces)
     end
   end
 
@@ -190,9 +222,12 @@ RSpec.describe SubmissionsExport do
   end
 
   describe "#export_time" do
+    subject { submissions_export.instance_eval { export_time }}
+    let(:parsed_time) { Date.parse("Oct 20 1452").to_time }
+    before { allow(Time).to receive(:now) { parsed_time }}
+
     it "should return the time now" do
-      expect(Time).to receive(:now)
-      submissions_export.instance_eval { export_time }
+      expect(subject).to eq(parsed_time)
     end
   end
 
