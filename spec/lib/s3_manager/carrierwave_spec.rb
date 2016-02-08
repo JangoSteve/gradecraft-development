@@ -112,6 +112,39 @@ RSpec.describe S3Manager::Carrierwave do
     end
   end
 
+  describe "filepath_includes_filename?" do
+    subject { s3_file_cylon.filepath_includes_filename? }
+    context "filepath is present and filepath includes/matches the filename" do
+      before do
+        allow(s3_file_cylon).to receive_messages(filepath: "some/path/to/nowhere.txt", filename: "nowhere.txt")
+      end
+
+      it "returns true" do
+        expect(subject).to be_truthy
+      end
+    end
+
+    context "filepath is not present" do
+      before do
+        allow(s3_file_cylon).to receive(:filepath) { nil }
+      end
+
+      it "returns false" do
+        expect(subject).to be_falsey
+      end
+    end
+
+    context "filepath is present but doesn't match the filename" do
+      before do
+        allow(s3_file_cylon).to receive_messages(filepath: "some/path/to/nowhere.txt", filename: "everglades.pdf")
+      end
+
+      it "returns false" do
+        expect(subject).to be_falsey
+      end
+    end
+  end
+
   describe "#cached_file_path" do
     subject { s3_file_cylon.cached_file_path }
     before do

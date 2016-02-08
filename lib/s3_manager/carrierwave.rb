@@ -52,7 +52,6 @@ module S3Manager
       read_attribute(file.mounted_as)
     end
 
-    # @mz todo: add specs
     def filepath_includes_filename?
       filepath.present? and filepath.match(filename)
     end
