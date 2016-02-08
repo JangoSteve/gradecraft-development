@@ -69,7 +69,10 @@ RSpec.describe S3Manager::Carrierwave do
     let(:tempfile) { Tempfile.new('walter') }
 
     context "cached_file_path is present" do
-      before { allow(s3_file_cylon).to receive(:cached_file_path) { "/some/great/path.png" }}
+      before do
+        allow(s3_file_cylon).to receive_messages(store_dir: "great_dir", mounted_filename: "stuff.txt")
+        allow(s3_file_cylon).to receive(:cached_file_path) { "/some/great/path.png" }
+      end
 
       it "returns the cached file path" do
         expect(subject).to eq "/some/great/path.png"
@@ -77,7 +80,9 @@ RSpec.describe S3Manager::Carrierwave do
     end
 
     context "filepath is present" do
-      before { allow(s3_file_cylon).to receive(:filepath) { tempfile }}
+      before do
+        allow(s3_file_cylon).to receive_messages(filepath: tempfile, filepath_includes_filename?: true)
+      end
 
       it "returns the CGI-unescaped filepath" do
         expect(CGI).to receive(:unescape).with(tempfile)
@@ -100,7 +105,7 @@ RSpec.describe S3Manager::Carrierwave do
   describe "#cached_file_path" do
     subject { s3_file_cylon.cached_file_path }
     before do
-      allow(s3_file_cylon).to receive_messages(store_dir: "great_dir", filename: "stuff.txt")
+      allow(s3_file_cylon).to receive_messages(store_dir: "great_dir", mounted_filename: "stuff.txt")
     end
 
     context "both store_dir and filename exist" do
@@ -111,13 +116,6 @@ RSpec.describe S3Manager::Carrierwave do
       it "caches the joined cached_file_path value" do
         first_call = subject
         expect(first_call.object_id).to eq(subject.object_id)
-      end
-    end
-
-    context "either store_dir or filename does not exist" do
-      before { allow(s3_file_cylon).to receive(:store_dir) { nil }}
-      it "returns nil" do
-        expect(subject).to be_nil
       end
     end
   end

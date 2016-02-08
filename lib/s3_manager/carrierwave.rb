@@ -50,7 +50,7 @@ module S3Manager
 
     # @mz todo: add specs
     def mounted_filename
-      read_attribute(mounted_as)
+      read_attribute(file.mounted_as)
     end
 
     # @mz todo: add specs
