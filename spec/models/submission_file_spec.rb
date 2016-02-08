@@ -6,8 +6,9 @@ describe SubmissionFile do
   let(:student) { build(:user, last_name: "de Kooning", first_name: "Willem") }
   let(:submission) { build(:submission, course: course, assignment: assignment, student: student) }
   let(:submission_file) { submission.submission_files.last }
+  let(:filename) { "test_image.jpg" }
   let(:new_submission_file) do
-    submission.submission_files.new file: fixture_file('test_image.jpg', 'img/jpg')
+    submission.submission_files.new filename: filename, file: fixture_file(filename, 'img/jpg')
   end
 
   subject { new_submission_file }
@@ -136,15 +137,17 @@ describe SubmissionFile do
   end
 
   describe "uploading multiple files" do
+    let(:filename) { "test_file.txt" }
+
     it "accepts multiple files" do
-      submission.submission_files.new(filepath: 'uploads/submission_file/', file: fixture_file('test_file.txt', 'img/jpg'))
+      submission.submission_files.new(filepath: 'uploads/submission_file/', filename: filename, file: fixture_file(filename, 'txt'))
       subject.submission.save!
       expect(submission.submission_files.count).to equal 2
     end
   end
 
-  describe "formatting filenames" do
-    subject { new_submission_file.filename }
+  describe "formatting name of mounted file" do
+    subject { new_submission_file.read_attribute(:file) }
     let(:save_submission) { new_submission_file.submission.save! }
 
     it "accepts text files as well as images" do
