@@ -169,6 +169,12 @@ describe SubmissionFile do
   end
 
   describe "url" do
+    subject { new_submission_file.url }
+    before { allow(new_submission_file).to receive_message_chain(:s3_object, :presigned_url) { "http://some.url" }}
+
+    it "returns the presigned amazon url" do
+      expect(subject).to eq("http://some.url")
+    end
   end
 
   describe "S3Manager::Carrierwave inclusion" do
