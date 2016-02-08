@@ -1,9 +1,13 @@
-require "active_record_spec_helper"
+require "rails_spec_helper"
 
 describe BadgeFile do
   let(:badge) { build(:badge) }
 
-  subject { badge.badge_files.new(filename: "test", file: fixture_file('test_image.jpg', 'img/jpg')) }
+  subject { new_badge_file }
+  let(:new_badge_file) { badge.badge_files.new image_file_attrs }
+
+  extend Toolkits::Models::Shared::Files
+  define_context # pull in attrs for image and text files
 
   describe "validations" do
     it { is_expected.to be_valid }
@@ -28,27 +32,35 @@ describe BadgeFile do
     end
   end
 
-  it "accepts text files as well as images" do
-    subject.file = fixture_file('test_file.txt', 'txt')
-    subject.badge.save!
-    expect expect(subject.url).to match(/.*\/uploads\/badge_file\/file\/#{subject.id}\/\d+_test_file\.txt/)
+  describe "formatting name of mounted file" do
+    subject { new_badge_file.read_attribute(:file) }
+    let(:save_badge) { new_badge_file.badge.save! }
+
+    it "accepts text files as well as images" do
+      new_badge_file.file = fixture_file('test_file.txt', 'txt')
+      save_badge
+      expect expect(subject).to match(/\d+_test_file\.txt/)
+    end
+
+    it "has an accessible url" do
+      save_badge
+      expect expect(subject).to match(/\d+_test_image\.jpg/)
+    end
+
+    it "shortens and removes non-word characters from file names on save" do
+      new_badge_file.file = fixture_file('Too long, strange characters, and Spaces (In) Name.jpg', 'img/jpg')
+      save_badge
+      expect(subject).to match(/\d+_too_long__strange_characters__and_spaces_\.jpg/)
+    end
   end
 
-  it "accepts multiple files" do
-    badge.badge_files.new(filename: "test", file: fixture_file('test_file.txt', 'img/jpg'))
-    subject.badge.save!
-    expect(badge.badge_files.count).to equal 2
-  end
+  describe "url" do
+    subject { new_badge_file.url }
+    before { allow(new_badge_file).to receive_message_chain(:s3_object, :presigned_url) { "http://some.url" }}
 
-  it "has an accessible url" do
-    subject.badge.save!
-    expect expect(subject.url).to match(/.*\/uploads\/badge_file\/file\/#{subject.id}\/\d+_test_image\.jpg/)
-  end
-
-  it "shortens and removes non-word characters from file names on save" do
-    subject.file = fixture_file('Too long, strange characters, and Spaces (In) Name.jpg', 'img/jpg')
-    badge.save!
-    expect expect(subject.url).to match(/.*\/uploads\/badge_file\/file\/#{subject.id}\/\d+_too_long__strange_characters__and_spaces_\.jpg/)
+    it "returns the presigned amazon url" do
+      expect(subject).to eq("http://some.url")
+    end
   end
 
   describe "#course" do
