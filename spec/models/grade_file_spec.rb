@@ -1,11 +1,16 @@
-require "active_record_spec_helper"
+require "rails_spec_helper"
+
 
 describe GradeFile do
+  subject { grade.grade_files.new image_file_attrs }
+
   let(:course) { build(:course) }
   let(:assignment) { build(:assignment, course: course) }
   let(:grade) { build(:grade, course: course, assignment: assignment) }
+  let(:new_grade_file) { grade.grade_files.new image_file_attrs }
 
-  subject { grade.grade_files.new(filename: "test", file: fixture_file('test_image.jpg', 'img/jpg')) }
+  extend Toolkits::Models::Shared::Files
+  define_context # pull in attrs for image and text files
 
   describe "validations" do
     it { is_expected.to be_valid }
@@ -30,27 +35,43 @@ describe GradeFile do
     end
   end
 
-  it "accepts text files as well as images" do
-    subject.file = fixture_file('test_file.txt', 'txt')
-    subject.grade.save!
-    expect expect(subject.url).to match(/.*\/uploads\/grade_file\/file\/#{subject.id}\/\d+_test_file\.txt/)
+  describe "uploading multiple files" do
+    it "accepts multiple files" do
+      grade.grade_files.new text_file_attrs
+      subject.grade.save!
+      expect(grade.grade_files.count).to equal 2
+    end
   end
 
-  it "accepts multiple files" do
-    grade.grade_files.new(filename: "test", file: fixture_file('test_file.txt', 'img/jpg'))
-    subject.grade.save!
-    expect(grade.grade_files.count).to equal 2
+  describe "formatting name of mounted file" do
+    subject { new_grade_file.read_attribute(:file) }
+    let(:save_grade) { new_grade_file.grade.save! }
+
+    it "accepts text files as well as images" do
+      new_grade_file.file = fixture_file('test_file.txt', 'txt')
+      save_grade
+      expect expect(subject).to match(/\d+_test_file\.txt/)
+    end
+
+    it "has an accessible url" do
+      save_grade
+      expect expect(subject).to match(/\d+_test_image\.jpg/)
+    end
+
+    it "shortens and removes non-word characters from file names on save" do
+      new_grade_file.file = fixture_file('Too long, strange characters, and Spaces (In) Name.jpg', 'img/jpg')
+      save_grade
+      expect(subject).to match(/\d+_too_long__strange_characters__and_spaces_\.jpg/)
+    end
   end
 
-  it "has an accessible url" do
-    subject.grade.save!
-    expect expect(subject.url).to match(/.*\/uploads\/grade_file\/file\/#{subject.id}\/\d+_test_image\.jpg/)
-  end
+  describe "url" do
+    subject { new_grade_file.url }
+    before { allow(new_grade_file).to receive_message_chain(:s3_object, :presigned_url) { "http://some.url" }}
 
-  it "shortens and removes non-word characters from file names on save" do
-    subject.file = fixture_file('Too long, strange characters, and Spaces (In) Name.jpg', 'img/jpg')
-    subject.grade.save!
-    expect expect(subject.url).to match(/.*\/uploads\/grade_file\/file\/#{subject.id}\/\d+_too_long__strange_characters__and_spaces_\.jpg/)
+    it "returns the presigned amazon url" do
+      expect(subject).to eq("http://some.url")
+    end
   end
 
   describe "#course" do

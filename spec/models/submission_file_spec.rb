@@ -1,4 +1,5 @@
-require "active_record_spec_helper"
+require "rails_spec_helper"
+
 
 describe SubmissionFile do
   let(:course) { build(:course) }
@@ -8,8 +9,8 @@ describe SubmissionFile do
   let(:submission_file) { submission.submission_files.last }
   let(:new_submission_file) { submission.submission_files.new image_file_attrs }
 
-  let(:image_file_attrs) {{ filename: "test_image.jpg", file: fixture_file("test_image.jpg", 'img/jpg') }}
-  let(:text_file_attrs) {{ filename: "test_file.txt", file: fixture_file("test_file.txt", 'txt') }}
+  extend Toolkits::Models::Shared::Files
+  define_context # pull in attrs for image and text files
 
   subject { new_submission_file }
 
