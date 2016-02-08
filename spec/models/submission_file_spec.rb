@@ -6,10 +6,10 @@ describe SubmissionFile do
   let(:student) { build(:user, last_name: "de Kooning", first_name: "Willem") }
   let(:submission) { build(:submission, course: course, assignment: assignment, student: student) }
   let(:submission_file) { submission.submission_files.last }
-  let(:filename) { "test_image.jpg" }
-  let(:new_submission_file) do
-    submission.submission_files.new filename: filename, file: fixture_file(filename, 'img/jpg')
-  end
+  let(:new_submission_file) { submission.submission_files.new image_file_attrs }
+
+  let(:image_file_attrs) {{ filename: "test_image.jpg", file: fixture_file("test_image.jpg", 'img/jpg') }}
+  let(:text_file_attrs) {{ filename: "test_file.txt", file: fixture_file("test_file.txt", 'txt') }}
 
   subject { new_submission_file }
 
@@ -109,7 +109,7 @@ describe SubmissionFile do
       group = build(:group, name: "Group Name")
       group_assignment = build(:assignment, grade_scope: "Group")
       group_submission = build(:submission, course: course, assignment: group_assignment, group: group)
-      group_file = group_submission.submission_files.new(file: fixture_file('test_image.jpg', 'img/jpg'))
+      group_file = group_submission.submission_files.new image_file_attrs
       expect(group_file.owner_name).to eq("Group-Name")
     end
   end
@@ -137,10 +137,8 @@ describe SubmissionFile do
   end
 
   describe "uploading multiple files" do
-    let(:filename) { "test_file.txt" }
-
     it "accepts multiple files" do
-      submission.submission_files.new(filepath: 'uploads/submission_file/', filename: filename, file: fixture_file(filename, 'txt'))
+      submission.submission_files.new text_file_attrs.merge(filepath: 'uploads/submission_file/')
       subject.submission.save!
       expect(submission.submission_files.count).to equal 2
     end
