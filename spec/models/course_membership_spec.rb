@@ -11,4 +11,15 @@ describe CourseMembership do
       expect(results).to_not include non_instructor
     end
   end
+
+  describe ".not_instructors_of_record" do
+    it "returns all course memberships that are marked as not instructors of record" do
+      instructor_of_record = create :professor_course_membership, instructor_of_record: true
+      non_instructor = create :professor_course_membership, instructor_of_record: false
+      results = described_class.not_instructors_of_record
+
+      expect(results).to include non_instructor
+      expect(results).to_not include instructor_of_record
+    end
+  end
 end
