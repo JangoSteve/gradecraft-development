@@ -34,7 +34,7 @@ class SubmissionsExportPerformer < ResqueJob::Performer
       :student_directories_created_successfully, # check whether the student directories were all created successfully
       :create_submission_text_files, # create text files in each student directory if there is submission data that requires it
       :create_submission_binary_files, # create binary files in each student directory
-      :write_note_for_missing_binary_files, 
+      :write_note_for_missing_binary_files,
       :remove_empty_student_directories,
       :generate_error_log, # write error log for errors that may have occurred during file generation
       :archive_exported_files,
@@ -115,7 +115,7 @@ class SubmissionsExportPerformer < ResqueJob::Performer
   def archive_root_dir
     @archive_root_dir ||= FileUtils.mkdir_p(archive_root_dir_path).first
   end
-  
+
   def archive_root_dir_path
     @archive_root_dir_path ||= File.expand_path(export_file_basename, tmp_dir)
   end
@@ -145,13 +145,11 @@ class SubmissionsExportPerformer < ResqueJob::Performer
     end
   end
 
-  # @mz todo: update specs
   # methods for building and formatting the archive filename
   def export_file_basename
     @export_file_basename ||= "#{archive_basename} - #{filename_timestamp}".gsub("\s+"," ")
   end
 
-  # @mz todo: update specs
   def filename_timestamp
     filename_time.strftime("%Y-%m-%d - %l%M%p").gsub("\s+"," ")
   end
@@ -229,7 +227,7 @@ class SubmissionsExportPerformer < ResqueJob::Performer
       @submissions = @assignment.student_submissions_with_files
     end
   end
-  
+
   def fetch_assignment
     @assignment = Assignment.find @attrs[:assignment_id]
   end
@@ -284,7 +282,7 @@ class SubmissionsExportPerformer < ResqueJob::Performer
   end
 
   ## creating student directories
-  
+
   def student_directories_created_successfully
     missing_student_directories.empty?
   end
@@ -373,7 +371,7 @@ class SubmissionsExportPerformer < ResqueJob::Performer
     @submissions.each do |submission|
       if submission.submission_files.present?
         submission.process_unconfirmed_files if submission.submission_files.unconfirmed.count > 0
-        create_binary_files_for_submission(submission) 
+        create_binary_files_for_submission(submission)
       end
     end
   end
@@ -432,18 +430,13 @@ class SubmissionsExportPerformer < ResqueJob::Performer
     student_directory_file_path(student, filename)
   end
 
-  # @mz todo: update specs
   def submission_binary_filename(student, submission_file, index)
     [ formatted_student_name(student), formatted_assignment_name, "Submission File #{index + 1}"].join(" - ") + submission_file.extension
   end
 
   def write_submission_binary_file(student, submission_file, index)
     file_path = submission_binary_file_path(student, submission_file, index)
-    if Rails.env.development?
-      submission_file.write_source_binary_to_path(file_path)
-    else
-      stream_s3_file_to_disk(submission_file, file_path)
-    end
+    stream_s3_file_to_disk(submission_file, file_path)
   end
 
   def stream_s3_file_to_disk(submission_file, target_file_path)
@@ -459,7 +452,7 @@ class SubmissionsExportPerformer < ResqueJob::Performer
   end
 
   def binary_file_error_message(message, student, submission_file, error_io)
-    "#{message}. Student ##{student.id}: #{student.last_name}, #{student.first_name}, " + 
+    "#{message}. Student ##{student.id}: #{student.last_name}, #{student.first_name}, " +
     "SubmissionFile ##{submission_file.id}: #{submission_file.filename}, error: #{error_io}"
   end
 

@@ -155,20 +155,9 @@ RSpec.describe SubmissionsExportPerformer, type: :background_job do
           subject
         end
 
-        context "rails env is development" do
-          before { allow(Rails).to receive_message_chain(:env, :development?) { true }}
-          it "writes the binary submission file to the target path" do
-            expect(submission_file1).to receive(:write_source_binary_to_path).with(mikos_bases_file_path)
-            subject
-          end
-        end
-
-        context "rails env is anything but development" do
-          before { allow(Rails).to receive_message_chain(:env, :development?) { false }}
-          it "streams the s3 file to the disk via the submission file" do
-            expect(performer).to receive(:stream_s3_file_to_disk).with(submission_file1, mikos_bases_file_path)
-            subject
-          end
+        it "streams the s3 file to the disk via the submission file" do
+          expect(performer).to receive(:stream_s3_file_to_disk).with(submission_file1, mikos_bases_file_path)
+          subject
         end
       end
 
@@ -176,15 +165,20 @@ RSpec.describe SubmissionsExportPerformer, type: :background_job do
         subject { performer.instance_eval { stream_s3_file_to_disk(@some_submission_file, @some_target_file_path) }}
         let(:s3_manager) { performer.instance_eval { s3_manager }}
         let(:mikos_bases_file_path) { "#{tmp_dir}/allyoarbases_r_belong_2_miko.snk" }
-        before(:each) do
+
+        let(:cache_ivars) do
           performer.instance_variable_set(:@some_submission_file, submission_file1)
           performer.instance_variable_set(:@some_target_file_path, mikos_bases_file_path)
-          allow(submission_file1).to receive(:s3_object_file_path) { "something-weird-happened-here" }
+        end
+
+        before(:each) do
+          allow(submission_file1).to receive(:s3_object_file_key) { "something-weird-happened-here" }
+          cache_ivars
         end
 
         context "s3_manager#write_s3_manager_to_disk succeeds without error" do
           before do
-            allow(s3_manager).to receive(:write_s3_manager_to_disk) { true }
+            allow(s3_manager).to receive(:write_s3_object_to_disk) { true }
           end
 
           it "writes the s3 file to the file path for the archive directory" do
@@ -194,10 +188,6 @@ RSpec.describe SubmissionsExportPerformer, type: :background_job do
         end
 
         context "s3_manager#write_s3_object_to_disk raises an Aws NoSuchKey error" do
-          before do
-            allow(s3_manager).to receive(:write_s3_manager_to_disk).and_raise(Aws::S3::Errors::NoSuchKey)
-          end
-
           it "marks the submission file as missing" do
             expect(submission_file1).to receive(:mark_file_missing)
             subject
@@ -210,7 +200,7 @@ RSpec.describe SubmissionsExportPerformer, type: :background_job do
         let(:final_horses_path) { File.expand_path("horses.png", tmp_dir) }
         let(:clean_up_horses) { File.delete final_horses_path if File.exist? final_horses_path }
         let(:copy_horses) { FileUtils.cp horses_path, final_horses_path }
-    
+
         subject do
           performer.instance_eval do
             remove_if_exists( @some_horses_path )

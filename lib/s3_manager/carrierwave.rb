@@ -61,18 +61,5 @@ module S3Manager
     def cache_store_dir
       self[:store_dir] = file.store_dir
     end
-
-    def strip_path
-      if filepath.present?
-        filepath.slice! "/#{bucket_name}/"
-        write_attribute(:filepath, filepath)
-        name = filepath.clone
-
-        # 2015-01-06-11-16-33%2Fsome-file.jpg -> some-file.jpg
-        # see s3 file structure created in /app/helpers/uploads_helper.rb
-        name.slice!(/.*\d{4}-\d{2}-\d{2}-\d{2}-\d{2}-\d{2}%2F/)
-        write_attribute(:filename, name)
-      end
-    end
   end
 end
