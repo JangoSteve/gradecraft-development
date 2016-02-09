@@ -53,7 +53,7 @@ module S3Manager
     end
 
     def filepath_includes_filename?
-      filepath.present? and filepath.match(filename)
+      filepath.present? and filepath.include?(filename)
     end
 
     protected
