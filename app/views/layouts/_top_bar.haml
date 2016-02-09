@@ -35,9 +35,8 @@
         %nav.mobile-nav.hidden-med-and-up
           %ul.nav.nav-pill.left
             %a.no-hover.site-title{:href => root_url }
-              = image_tag "gradecraft_logo.png", :width => "100"
-          %ul.nav.nav-pill.right
-            = render 'layouts/navigation/login_nav'
+              = image_tag "GradeCraft_Logo_Mark_RGB.png", :width => "30"
+            = render 'layouts/navigation/overview_nav'
 
       - if current_user.present?
         %a.btn-navbar-right.btn-navbar-navtoggle.btn-flyout-right-trigger
