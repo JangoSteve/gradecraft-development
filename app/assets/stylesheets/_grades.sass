@@ -6,9 +6,6 @@
     float: right
     margin-left: .25rem
 
-select#grade_raw_score, input[type=text]#grade_raw_score
-  // @include transition-property("background")
-
 select#grade_raw_score[disabled], input[type=text]#grade_raw_score[disabled]
   background: $color-grey-6 !important
   color: $color-grey-4
@@ -25,10 +22,6 @@ select#grade_raw_score[disabled], input[type=text]#grade_raw_score[disabled]
   border-radius: $global-radius
 
 #updated-at-current
-  // @include transition-property("background, border-color")
-  // @include transition-duration(0.3s)
-  // @include transition-timing-function(ease)
-
   &.ng-animate
     background: $color-white
     border-color: $color-grey-6
@@ -55,11 +48,6 @@ select#grade_raw_score[disabled], input[type=text]#grade_raw_score[disabled]
   background-color: $color-blue-4
   display: inline
 
-  // transitions
-  // @include transition-property("padding, font-size, opacity, border-color")
-  // @include transition-duration(0.4s)
-  // @include transition-timing-function(ease)
-
   &.inactive
     // @include opacity(0.4)
     color: $color-grey-8
@@ -73,7 +61,5 @@ select#grade_raw_score[disabled], input[type=text]#grade_raw_score[disabled]
 
 /* This is the box that holds the custom entry field */
 .gradebox
-  // @include opacity(0.9)
-
   input
     border: none
