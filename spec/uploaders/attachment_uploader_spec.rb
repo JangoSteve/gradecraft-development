@@ -1,6 +1,9 @@
 require 'active_record_spec_helper'
 require_relative '../toolkits/uploaders/attachment_uploader'
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+require_relative '../support/uni_mock/rails'
+require_relative '../support/uni_mock/time'
+require_relative '../support/random_file/content'
+
 include Toolkits::Uploaders::AttachmentUploader
 
 RSpec.describe AttachmentUploader do
