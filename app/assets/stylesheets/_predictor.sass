@@ -290,12 +290,13 @@ article.predictor-article.status-locked
       border-top: 18px solid $color-red-1
     .switch-down-button.disabled
       border-top: 18px solid $color-orange-1
-  .predictor-binary-switch .switch-handle
-    background-color: $color-red-1
-  .predictor-binary-switch .switch-socket
-    background-color: $color-orange-1
-  .predictor-binary-switch .switch-socket.on
-    background-color: $color-orange-1
+  .predictor-binary-switch
+    .switch-handle
+      background-color: $color-red-1
+    .switch-socket
+      background-color: $color-orange-1
+    .switch-socket.on
+      background-color: $color-orange-1
 
 article.predictor-article.status-graded
   background-color: $color-blue-4
@@ -346,18 +347,19 @@ article.predictor-article
   .ui-state-default, .ui-widget-content .ui-state-default
     border: none
 
-  .ui-slider .ui-slider-range
-    background: $color-green-2
-    border-radius: 1rem
+  .ui-slider
+    .ui-slider-range
+      background: $color-green-2
+      border-radius: 1rem
 
-  .ui-slider .ui-slider-handle
-    width: 25px
-    height: 25px
-    position: absolute
-    top: -7px
-    margin-left: -12px
-    background: $color-green-1
-    border-radius: 1rem
+    .ui-slider-handle
+      width: 25px
+      height: 25px
+      position: absolute
+      top: -7px
+      margin-left: -12px
+      background: $color-green-1
+      border-radius: 1rem
 
 /* Binary Switch */
 
