@@ -1,4 +1,5 @@
 @import color
+@import layout
 
 $color-timeline-content: $color-grey-6
 $color-timeline-content-shadow: $color-grey-5
@@ -65,7 +66,7 @@ $color-timeline-vertical-line: $color-blue-5
   &:last-child
     margin-bottom: 0
 
-@media only screen and (min-width: 1170px)
+@media only screen and (min-width: $media-medium-max)
   .timeline-block
     margin: 4em 0
 
@@ -100,7 +101,7 @@ $color-timeline-vertical-line: $color-blue-5
   &.timeline-submission
     background: $color-timeline-submission
 
-@media only screen and (min-width: 1170px)
+@media only screen and (min-width: $media-medium-max)
   .timeline-img
     left: 50%
     margin-left: -20px
@@ -213,7 +214,7 @@ $color-timeline-vertical-line: $color-blue-5
     border: 7px solid transparent
     border-right: 7px solid $color-timeline-content
 
-@media only screen and (min-width: 768px)
+@media only screen and (min-width: $media-small-max)
   .timeline-content
     h2
       font-size: 20px
@@ -227,7 +228,7 @@ $color-timeline-vertical-line: $color-blue-5
       font-size: 14px
       font-size: 0.875rem
 
-@media only screen and (min-width: 1170px)
+@media only screen and (min-width: $media-medium-max)
   .timeline-content
     margin-left: 0
     padding: 1.6em
@@ -273,7 +274,7 @@ $color-timeline-vertical-line: $color-blue-5
       -moz-animation: timeline-bounce-2 0.6s
       animation: timeline-bounce-2 0.6s
 
-@media only screen and (min-width: 1170px)
+@media only screen and (min-width: $media-medium-max)
   /* inverse bounce effect on even content blocks */
   .cssanimations .timeline-block:nth-child(even) .timeline-content.bounce-in
     -webkit-animation: timeline-bounce-2-inverse 0.6s
