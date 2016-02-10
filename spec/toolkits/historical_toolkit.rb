@@ -116,7 +116,7 @@ RSpec.shared_examples "a historical model" do |fixture, updated_attributes|
       model.save
       another_model.save
 
-      history = model.historical_merge(another_model)
+      history = model.historical_merge(another_model).history
 
       expect(history.length).to eq 2
       expect(history.first.changeset["id"].last).to eq another_model.id

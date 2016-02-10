@@ -1,6 +1,6 @@
 module SubmissionGradeHistory
   def submission_grade_filtered_history(submission, grade, only_student_visible_grades=true)
-    HistoryFilter.new(submission.historical_merge(grade))
+    HistoryFilter.new(submission.historical_merge(grade).history)
       .remove("name" => "admin_notes")
       .remove("name" => "feedback_read")
       .remove("name" => "feedback_read_at")

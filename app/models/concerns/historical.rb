@@ -22,7 +22,7 @@ module Historical
   end
 
   def history
-    self.versions.reverse.map do |version|
+    @history ||= self.versions.reverse.map do |version|
       history = HistoryItem.new(version)
       history.changeset.merge!("object" => self.class.name,
                                "event" => version.event,
@@ -33,10 +33,17 @@ module Historical
   end
 
   def historical_merge(historical_model)
-    return self.history if historical_model.nil?
+    return self if historical_model.nil?
 
-    CollectionMerger.new(self.history, historical_model.history)
+    self.history = CollectionMerger.new(self.history, historical_model.history)
       .merge(field: ->(history) { history.changeset["recorded_at"] },
              order: :desc)
+    self
+  end
+
+  private
+
+  def history=(history)
+    @history = history
   end
 end
