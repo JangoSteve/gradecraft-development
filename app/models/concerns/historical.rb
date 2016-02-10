@@ -41,6 +41,13 @@ module Historical
     self
   end
 
+  def historical_collection_merge(historical_collection)
+    return self if historical_collection.nil? || historical_collection.empty?
+
+    historical_collection.each { |historical_model| historical_merge(historical_model) }
+    self
+  end
+
   private
 
   def history=(history)

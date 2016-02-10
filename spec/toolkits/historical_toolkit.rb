@@ -112,7 +112,7 @@ RSpec.shared_examples "a historical model" do |fixture, updated_attributes|
   describe "#historical_merge", versioning: true do
     let(:another_model) { build fixture }
 
-    it "returns new history with 2 histories for 2 creation events" do
+    it "merges history with 2 histories for 2 creation events" do
       model.save
       another_model.save
 
@@ -121,6 +121,19 @@ RSpec.shared_examples "a historical model" do |fixture, updated_attributes|
       expect(history.length).to eq 2
       expect(history.first.changeset["id"].last).to eq another_model.id
       expect(history.last.changeset["id"].last).to eq model.id
+    end
+  end
+
+  describe "#historical_collection_merge", versioning: true do
+    let(:historical_collection) { [build(fixture), build(fixture)] }
+
+    it "merges history for all the historical models in the collection" do
+      model.save
+      historical_collection.each(&:save)
+
+      history = model.historical_collection_merge(historical_collection).history
+
+      expect(history.length).to eq 3
     end
   end
 end
