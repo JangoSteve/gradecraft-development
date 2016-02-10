@@ -1,4 +1,5 @@
-require "active_record_spec_helper"
+require "rails_spec_helper"
+require "toolkits/historical_toolkit"
 
 describe SubmissionFile do
   let(:course) { build(:course) }
@@ -18,6 +19,8 @@ describe SubmissionFile do
       expect(subject.errors[:filename]).to include "can't be blank"
     end
   end
+
+  it_behaves_like "a historical model", :submission_file, filename: "my_submission.doc"
 
   describe "scopes" do
     let(:unconfirmed_file) { create(:submission_file, last_confirmed_at: nil) }
@@ -69,18 +72,6 @@ describe SubmissionFile do
       it "doesn't return submission files where the file is missing" do
         expect(subject).not_to include(missing_file)
       end
-    end
-  end
-
-  describe "versioning", versioning: true do
-    before { subject.save }
-
-    it "is enabled for submissions" do
-      expect(PaperTrail).to be_enabled
-    end
-
-    it "is versioned" do
-      expect(subject).to be_versioned
     end
   end
 

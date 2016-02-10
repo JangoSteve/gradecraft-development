@@ -1,4 +1,5 @@
 class SubmissionFile < ActiveRecord::Base
+  include Historical
   include S3File
 
   attr_accessible :file, :filename, :filepath, :submission_id, :file_missing, :last_confirmed_at
@@ -7,8 +8,6 @@ class SubmissionFile < ActiveRecord::Base
 
   mount_uploader :file, AttachmentUploader
   process_in_background :file
-
-  has_paper_trail
 
   validates :filename, presence: true, length: { maximum: 60 }
   validates :file, file_size: { maximum: 40.megabytes.to_i }
