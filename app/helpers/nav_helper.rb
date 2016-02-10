@@ -9,10 +9,10 @@ module NavHelper
 
   def content_nav(&block)
     capture_haml do
-      haml_tag :dl, class: 'sub-nav', role: 'navigation', title: 'Content navigation',"aria-label" => "Content navigation" do
+      haml_tag :dl, class: 'sub-nav hide-for-small', role: 'navigation', title: 'Content navigation',"aria-label" => "Content navigation" do
         haml_tag :dd, class: 'navbar-nav', &block if block
       end
     end
   end
-  
+
 end

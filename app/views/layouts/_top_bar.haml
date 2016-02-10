@@ -12,7 +12,7 @@
       - if current_user.present?
         %a.btn-navbar-left.btn-navbar-navtoggle.btn-flyout-left-trigger
           %i.fa.fa-dashboard.fa-fw
-      %nav.the-nav.nav-collapse.clearfix{:role => "navigation"}
+      %nav.the-nav.nav-collapse.hide-for-small.clearfix{:role => "navigation"}
         %ul.nav.nav-pill.left
           %li.course-site
             - if current_course
