@@ -1,4 +1,5 @@
-require "rails_spec_helper"
+require "active_record_spec_helper"
+require_relative '../toolkits/models/shared/files'
 
 describe ChallengeFile do
   let(:challenge) { build(:challenge) }

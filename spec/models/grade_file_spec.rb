@@ -1,5 +1,5 @@
-require "rails_spec_helper"
-
+require "active_record_spec_helper"
+require_relative '../toolkits/models/shared/files'
 
 describe GradeFile do
   subject { grade.grade_files.new image_file_attrs }

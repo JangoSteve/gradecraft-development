@@ -1,10 +1,12 @@
-require 'rails_spec_helper'
-
-include Toolkits::Uploaders::AttachmentUploader
-include UniMock::Rails
-include UniMock::Time
+require 'active_record_spec_helper'
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+require_relative '../toolkits/uploaders/attachment_uploader'
 
 RSpec.describe AttachmentUploader do
+  include Toolkits::Uploaders::AttachmentUploader
+  include UniMock::StubTime
+  include UniMock::StubRails
+
   let(:uploader) { AttachmentUploader.new(model, :file) }
   let(:model) { MockClass::FullUpFileKlass.new }
   let(:relation_defaults) {{
@@ -33,8 +35,6 @@ RSpec.describe AttachmentUploader do
     end
 
     context "env is anything but development" do
-      before { stub_env("werewolf-env") }
-
       it "joins the store dirs and doesn't use the developer tag" do
         expect(subject).to eq "uploads/some-course/some-assignment/devious_files/dave-eversby"
       end

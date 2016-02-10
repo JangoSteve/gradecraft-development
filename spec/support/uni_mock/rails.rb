@@ -1,5 +1,5 @@
 module UniMock
-  module Rails
+  module StubRails
     # include RSpec::Mocks::Syntax
 
     def stub_env(env_name)

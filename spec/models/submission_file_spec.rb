@@ -1,5 +1,5 @@
-require "rails_spec_helper"
-
+require "active_record_spec_helper"
+require_relative '../toolkits/models/shared/files'
 
 describe SubmissionFile do
   let(:course) { build(:course) }

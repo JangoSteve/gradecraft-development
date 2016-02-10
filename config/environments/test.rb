@@ -14,7 +14,7 @@ GradeCraft::Application.configure do
 end
 
 CarrierWave.configure do |config|
-  config.storage = :fog
+  config.storage = :file
   config.enable_processing = false
 end
 
