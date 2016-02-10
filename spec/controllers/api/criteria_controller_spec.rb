@@ -1,12 +1,10 @@
 require 'rails_spec_helper'
 
 describe API::CriteriaController do
-
   let(:world) { World.create.with(:course, :student, :assignment, :rubric, :criterion, :criterion_grade) }
   let(:professor) { create(:professor_course_membership, course: world.course).user }
 
   context "as professor" do
-
     before(:each) { login_user(professor) }
 
     describe "GET criteria" do

@@ -1,7 +1,6 @@
 require 'rails_spec_helper'
 
 describe API::GradesController do
-
   let(:world) { World.create.with(:course, :student, :assignment, :grade) }
   let(:professor) { create(:professor_course_membership, course: world.course).user }
 
@@ -18,7 +17,6 @@ describe API::GradesController do
   end
 
   context "as student" do
-
     before(:each) { login_user(world.student) }
 
     describe "GET show" do

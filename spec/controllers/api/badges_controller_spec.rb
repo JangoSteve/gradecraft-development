@@ -1,7 +1,6 @@
 require 'rails_spec_helper'
 
 describe API::BadgesController do
-
   let(:world) { World.create.with(:course, :student, :badge) }
   let(:professor) { create(:professor_course_membership, course: world.course).user }
 
