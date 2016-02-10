@@ -15,6 +15,7 @@ module SubmissionGradeHistory
       .remove("name" => "submission_id")
       .remove("name" => "submitted_at")
       .remove("name" => "updated_at")
+      .rename("SubmissionFile" => "Attachment")
       .include { |history|
         if (history.changeset["object"] == "Grade" && only_student_visible_grades)
           grade = history.version.reify

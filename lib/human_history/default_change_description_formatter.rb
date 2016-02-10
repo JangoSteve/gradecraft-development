@@ -21,7 +21,7 @@ module HumanHistory
     protected
 
     def attribute_name
-      type.classify.constantize.human_attribute_name(attribute).downcase
+      attribute.humanize(capitalize: false)
     end
 
     def format_change(change)
