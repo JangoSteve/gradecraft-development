@@ -64,6 +64,7 @@ RSpec.shared_examples "a historical model" do |fixture, updated_attributes|
     end
 
     context "with an updated changeset" do
+      let!(:changes) { model.previous_changes }
       subject { model.history }
 
       before { model.update_attributes updated_attributes }
@@ -77,7 +78,8 @@ RSpec.shared_examples "a historical model" do |fixture, updated_attributes|
 
         it "returns the changesets for an updated #{fixture}" do
           updated_attributes.each do |key, value|
-            expect(subject).to include({ key.to_s => [nil, value] })
+            change = changes[key].nil? ? nil : changes[key].last
+            expect(subject).to include({ key.to_s => [change, value] })
           end
         end
 
