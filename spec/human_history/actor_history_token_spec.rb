@@ -22,13 +22,18 @@ describe HumanHistory::ActorHistoryToken do
       expect(subject.parse).to eq({ actor: "Jimmy Page" })
     end
 
-    it "returns `Someone` if the user is not found" do
-      subject = described_class.new "actor_id", 123, Object
-      expect(subject.parse).to eq({ actor: "Someone" })
+    context "user is not found" do
+      let(:subject) { described_class.new "actor_id", 123, Object }
+
+      it "returns 'Someone'" do
+        expect(subject.parse).to eq({ actor: "Someone" })
+      end
     end
 
-    it "returns `You` if the user is the current user" do
-      expect(subject.parse(current_user: user)).to eq({ actor: "You" })
+    context "user is the current user" do
+      it "returns 'You'" do
+        expect(subject.parse(current_user: user)).to eq({ actor: "You" })
+      end
     end
   end
 end
