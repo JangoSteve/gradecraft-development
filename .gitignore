@@ -6,8 +6,6 @@
 config/database.yml
 config/mongoid.yml
 db/backups/*
-grade-tracker.sublime-project
-grade-tracker.sublime-workspace
 log/*.log
 public/uploads/*
 /spec/support/uploads/*
