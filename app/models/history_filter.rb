@@ -44,6 +44,17 @@ class HistoryFilter
     self
   end
 
+  def rename(options)
+    object_key = options.keys.first
+    object_value = options.values.first
+
+    history.map(&:changeset).each do |changeset|
+      object = changeset["object"]
+      changeset["object"] = object_value if object == object_key
+    end
+    self
+  end
+
   def empty_changeset?(set)
     set.values.none? { |value| value.is_a? Array }
   end

@@ -96,4 +96,15 @@ describe HistoryFilter do
       expect(result).to eq [{ "attr" => ["value1", "value2"] }]
     end
   end
+
+  describe "#rename" do
+    it "changes the object value in the changeset" do
+      history = [OpenStruct.new(changeset: { "event" => "blah", "object" => "Grade",
+                                             "change" => ["before", "after"] }),
+                 OpenStruct.new(changeset: { "event" => "bleh", "change" => ["before", "after"] }),
+                 OpenStruct.new(changeset: {})]
+      result = described_class.new(history).rename("Grade" => "BLAH").changesets
+      expect(result.first["object"]).to eq "BLAH"
+    end
+  end
 end
